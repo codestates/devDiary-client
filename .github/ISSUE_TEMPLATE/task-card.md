@@ -8,17 +8,16 @@ assignees: ''
 ---
 
 #제목에 [Client], [Server] 꼭 써주세요!
-###ISSUE
+###ISSUE 세가지 이슈중에 하나 골라주세요!
 Type: bug, feature, delete
-Detail: fix actions from client redux
 
-###TODO
+###TODO 최대한 세세하게 써주세요!
 - [ ]  Job1
 - [ ]  Job2
 - [ ]  Job3
 
 ###Estimated time
-> 하나를 골라주세요!
+> 하나를 골라주세요! 라벨만 추가해주시면 됩니다~!~!
 - 0.5h
 - 1h
 - 1.5h
@@ -26,6 +25,6 @@ Detail: fix actions from client redux
 - 2.5h
 - 3h
 
-###Labels
+###Labels 추가해야 하는 라벨 예시
 Estimated time: E: 1h
 Urgency: High, Middle, Low
