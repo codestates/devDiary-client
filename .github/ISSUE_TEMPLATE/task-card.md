@@ -9,7 +9,7 @@ assignees: ''
 
 #제목에 [Client], [Server] 꼭 써주세요!
 ###ISSUE 세가지 이슈중에 하나 골라주세요!
-Type:feature, delete, bug
+Type: feature, delete, bug
 
 ###TODO 최대한 세세하게 써주세요!
 - [ ]  Job1
