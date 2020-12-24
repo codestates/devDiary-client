@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import UpdateUserInfo from "./component/UpdateUserInfo";
+
+
+class App extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      isLogin: true,
+      userinfo: {
+        email:'codbs54@gmail.com',
+        username:'yullmoo',
+        password:'dudrbs0511'
+    }
 }
+  };
+  
 
-export default App;
+  render() {
+  
+    return (
+      <UpdateUserInfo userinfo={this.state.userinfo}></UpdateUserInfo>
+    );
+  }
+}
+export default (App);
