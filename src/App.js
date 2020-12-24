@@ -1,12 +1,16 @@
 import React from "react";
+
 import NavBar from "./component/NavBar"
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
+  Route, 
+  Redirect, 
+  withRouter
 } from "react-router-dom";
-// import axios from "axios";
-
+import axios from "axios";
+import Login from"./component/Login"
+import Hi from"./component/hi"
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
 
@@ -18,13 +22,39 @@ class App extends React.Component {
     userinfo: null,
   };
 
+  handleResponseSuccess() {
+    axios.get('http://localhost:4000/userinfo')
+    .then(param=>{
+      this.setState({ isLogin: true, userinfo: param.data });
+    })
+  
+  }            
+            
   render() {
+    const { isLogin, userinfo } = this.state;
+    
     return (
       <>
         <h1>hi every one</h1>
         <NavBar isLogin={this.state.isLogin}></NavBar>
       <Router>
         <Switch>
+      <Route 
+          path='/login'
+          render={() => (
+            <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
+          )}
+        />
+        <Route exact path='/hi' render={() => <Hi />} />
+        <Route
+            path='/'
+            render={() => {
+              if (isLogin) {
+                return <Redirect to='/hi' />;
+              }
+              return <Redirect to='/login' />;
+            }}
+          />
           <Route exact path="/">
             <Main />
           </Route>
@@ -37,5 +67,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;
