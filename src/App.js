@@ -1,4 +1,5 @@
 import React from "react";
+import NavBar from "./component/NavBar"
 import {
   Switch,
   Route,
@@ -18,14 +19,20 @@ class App extends React.Component {
 
   render() {
     return (
-      <Switch>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        <Route exact path="/user/signUp">
-          <SignUp />
-        </Route>
-      </Switch>
+      <>
+        <h1>hi every one</h1>
+        <NavBar isLogin={this.state.isLogin}></NavBar>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route exact path="/user/signUp">
+            <SignUp />
+          </Route>
+        </Switch>
+      </Router>
+    </>
     );
   }
 }
