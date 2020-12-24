@@ -1,10 +1,20 @@
 import React from "react";
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+
+import NavBar from "./component/NavBar"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route, 
+  Redirect, 
+  withRouter
+} from "react-router-dom";
 import axios from "axios";
-import './App.css';
 import Login from"./component/Login"
 import Hi from"./component/hi"
+import Main from "./component/Main";
+import SignUp from "./component/SignUp";
 
+import "./App.css";
 
 class App extends React.Component {
   state = {
@@ -18,16 +28,18 @@ class App extends React.Component {
       this.setState({ isLogin: true, userinfo: param.data });
     })
   
-  }
-
+  }            
+            
   render() {
     const { isLogin, userinfo } = this.state;
-
+    
     return (
-      <div>
-      <Switch>
-
-        <Route
+      <>
+        <h1>hi every one</h1>
+        <NavBar isLogin={this.state.isLogin}></NavBar>
+      <Router>
+        <Switch>
+      <Route 
           path='/login'
           render={() => (
             <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
@@ -43,8 +55,15 @@ class App extends React.Component {
               return <Redirect to='/login' />;
             }}
           />
-      </Switch>
-    </div>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route exact path="/user/signUp">
+            <SignUp />
+          </Route>
+        </Switch>
+      </Router>
+    </>
     );
   }
 }
