@@ -45,16 +45,7 @@ class App extends React.Component {
             <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
           )}
         />
-        <Route exact path='/hi' render={() => <Hi />} />
-        <Route
-            path='/'
-            render={() => {
-              if (isLogin) {
-                return <Redirect to='/hi' />;
-              }
-              return <Redirect to='/login' />;
-            }}
-          />
+        <Route exact path='/login' render={() => <Login />} />
           <Route exact path="/">
             <Main />
           </Route>

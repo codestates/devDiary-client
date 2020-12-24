@@ -120,7 +120,7 @@ class Signup extends React.Component {
     } else if(!emailChecked || !usernameChecked) {
       this.setState({ errorMessage: "이메일과 닉네임 중복 확인을 해주세요" });
     } else {
-      axios.post("localhost:3000/user/signup", {
+      axios.post("http://localhost:4000/user/signup", {
         username: username,
         password: password,
         email: email
