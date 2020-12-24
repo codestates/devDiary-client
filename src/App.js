@@ -1,4 +1,5 @@
 import React from "react";
+import NavBar from "./component/NavBar"
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,6 +19,9 @@ class App extends React.Component {
 
   render() {
     return (
+      <>
+        <h1>hi every one</h1>
+        <NavBar isLogin={this.state.isLogin}></NavBar>
       <Router>
         <Switch>
           <Route exact path="/">
@@ -26,6 +30,7 @@ class App extends React.Component {
 
         </Switch>
       </Router>
+    </>
     );
   }
 }
