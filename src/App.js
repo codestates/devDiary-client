@@ -1,7 +1,8 @@
 import React from "react";
 import {
+  BrowserRouter as Router,
   Switch,
-  Route,
+  Route
 } from "react-router-dom";
 // import axios from "axios";
 
@@ -16,17 +17,14 @@ class App extends React.Component {
   };
 
   render() {
-    const { userdata } = this.state;
     return (
-      <Switch>
-        <Route
-            exact
-            path='/user/userinfo'
-            render={() => (
-              <Userinfo userdata={userdata} />
-            )}
-          />
-      </Switch>
+      <Router>
+        <Switch>
+          <Route exact path="/user/userinfo">
+            <Userinfo />
+          </Route>
+        </Switch>
+      </Router>
     );
   }
 }
