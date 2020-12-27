@@ -57,7 +57,7 @@ class Signup extends React.Component {
 
   checkEmail = () => {
     function isEmail(asValue) {
-      let regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+      let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
       return regExp.test(asValue);
     }
     const { email } = this.state;
@@ -182,7 +182,7 @@ class Signup extends React.Component {
               <span className="alert-box">{usernameMessage}</span>
             </div>
             <div>
-              <Link to="/login">이미 아이디가 있으신가요?</Link>
+              <Link to="/user/login">이미 아이디가 있으신가요?</Link>
             </div>
             <div className="alert-box">{errorMessage}</div>
             <button

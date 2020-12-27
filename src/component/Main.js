@@ -8,8 +8,8 @@ import "./css/Main.css";
 function Main() {
   return (<>
     <Router>
-      <Link to="/freeBoard">자유게시판</Link>
-      <Link to="/queBoard">질문게시판</Link>
+      <Link to="/diary">자유게시판</Link>
+      <Link to="/question">질문게시판</Link>
     </Router>
 
   </>)

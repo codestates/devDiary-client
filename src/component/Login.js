@@ -46,7 +46,7 @@ class Login extends React.Component {
             <input type='password' onChange={this.handleInputValue("password")}></input>
           </div>
           <div>
-            <Link to='/user/signUp'><button>회원가입</button></Link>
+            <Link to='/user/signup'><button>회원가입</button></Link>
           </div>
           <button className='btn btn-login' type='submit' onClick={this.handleLogin}>
             로그인

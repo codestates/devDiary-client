@@ -1,14 +1,12 @@
 import React from "react";
-
-import NavBar from "./component/NavBar"
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect,
-  withRouter
+  Route
 } from "react-router-dom";
 import axios from "axios";
+
+import NavBar from "./component/NavBar"
 import Login from "./component/Login"
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
@@ -22,7 +20,7 @@ class App extends React.Component {
   };
 
   handleResponseSuccess() {
-    axios.get('http://localhost:4000/userinfo')
+    axios.get('http://localhost:4000/user/userinfo')
       .then(param => {
         this.setState({ isLogin: true, userinfo: param.data });
       })
@@ -30,8 +28,6 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLogin, userinfo } = this.state;
-
     return (
       <>
         <h1>hi every one</h1>
@@ -39,14 +35,17 @@ class App extends React.Component {
         <Router>
           <Switch>
             <Route
-              path='/login'
+              path='/user/login'
               render={() => (
                 <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
               )}
             />
-            <Route exact path='/login' render={() => <Login />} />
-            <Route exact path='/login' render={() => <Main />} />
-            <Route exact path='/login' render={() => <SignUp />} />
+            <Route exact path='/'> 
+              <Main /> 
+            </Route>
+            <Route exact path='/user/signup'>
+              <SignUp />
+            </Route>
           </Switch>
         </Router>
       </>
