@@ -1,16 +1,21 @@
 import React from "react";
+
+import NavBar from "./component/NavBar"
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
+  Route, 
+  Redirect, 
   withRouter
 } from "react-router-dom";
 import axios from "axios";
-import NavBar from "./component/NavBar"
-import Login from "./component/Login"
+import Login from"./component/Login"
+import Hi from"./component/hi"
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
+
 import "./App.css";
+
 class App extends React.Component {
   state = {
     isLogin: false,
