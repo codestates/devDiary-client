@@ -1,51 +1,47 @@
 import React from "react";
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  withRouter
+} from "react-router-dom";
 import axios from "axios";
-import './App.css';
-import Login from"./component/Login"
-import Hi from"./component/hi"
-
-
+import NavBar from "./component/NavBar"
+import Login from "./component/Login"
+import Main from "./component/Main";
+import SignUp from "./component/SignUp";
+import "./App.css";
 class App extends React.Component {
   state = {
     isLogin: false,
     userinfo: null,
   };
-
   handleResponseSuccess() {
-    axios.get('http://localhost:4000/userinfo')
-    .then(param=>{
-      this.setState({ isLogin: true, userinfo: param.data });
-    })
-  
+    axios.get('http://localhost:4000/user/userinfo')
+      .then(param => {
+        this.setState({ isLogin: true, userinfo: param.data });
+      })
   }
-
   render() {
-    const { isLogin, userinfo } = this.state;
-
     return (
-      <div>
-      <Switch>
-
-        <Route
-          path='/login'
-          render={() => (
-            <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
-          )}
-        />
-        <Route exact path='/hi' render={() => <Hi />} />
-        <Route
-            path='/'
-            render={() => {
-              if (isLogin) {
-                return <Redirect to='/hi' />;
-              }
-              return <Redirect to='/login' />;
-            }}
-          />
-      </Switch>
-    </div>
+      <>
+        <h1>hi every one</h1>
+        <Router>
+          <NavBar isLogin={this.state.isLogin}></NavBar>
+          <Switch>
+            <Route path='/user/login'>
+              <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
+            </Route>
+            <Route exact path='/'>
+              <Main />
+            </Route>
+            <Route path='/user/signup'>
+              <SignUp />
+            </Route>
+          </Switch>
+        </Router>
+      </>
     );
   }
 }
-export default App;
+export default withRouter(App);
