@@ -1,16 +1,14 @@
 import React from "react";
-
 import NavBar from "./component/NavBar"
 import {
   BrowserRouter as Router,
   Switch,
-  Route, 
-  Redirect, 
-  withRouter
+  Route
 } from "react-router-dom";
 import axios from "axios";
+import NavBar from "./component/NavBar"
 import Login from"./component/Login"
-import Hi from"./component/hi"
+import Userinfo from "./component/Userinfo";
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
 
@@ -26,7 +24,9 @@ class App extends React.Component {
       .then(param => {
         this.setState({ isLogin: true, userinfo: param.data });
       })
+
   }
+
   render() {
     return (
       <>
@@ -36,6 +36,9 @@ class App extends React.Component {
           <Switch>
             <Route path='/user/login'>
               <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
+            </Route>
+            <Route exact path="/user/userinfo">
+              <Userinfo />
             </Route>
             <Route exact path='/'>
               <Main />

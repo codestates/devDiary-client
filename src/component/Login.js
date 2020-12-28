@@ -2,17 +2,12 @@ import React from "react";
 import { Link,withRouter } from "react-router-dom";
 import axios from "axios";
 class Login extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = { //post용
-        email: "",
-        password: "",
-        errorMessage: ""
-      };
-      this.handleInputValue = this.handleInputValue.bind(this);
-    }
-    handleInputValue = (key) => (e) => {
-      this.setState({ [key]: e.target.value });
+  constructor(props) {
+    super(props);
+    this.state = { //post용
+      email: "",
+      password: "",
+      errorMessage: ""
     };
     handleLogin = () => {
       const { email, password} = this.state; //변수할당
@@ -37,7 +32,7 @@ class Login extends React.Component {
       return (
         <div>
         <h1>Sign In</h1>
-        <form onSubmit={(e) => e.preventDefault()}>  
+        <form onSubmit={(e) => e.preventDefault()}>
           <div>
             <span>이메일</span>
             <input type='email' onChange={this.handleInputValue("email")}></input>
@@ -54,8 +49,7 @@ class Login extends React.Component {
           </button>
           {<div className="alert-box">{this.state.errorMessage}</div>}
         </form>
-    </div>
-      );
-    }
+      </div>
+    );
   }
   export default withRouter(Login);
