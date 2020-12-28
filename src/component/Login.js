@@ -17,7 +17,7 @@ class Login extends React.Component {
     handleLogin = () => {
       const { email, password} = this.state; //변수할당
       if(email&&password){ //다 채워져있으면 서버에보내기
-        axios.post('http://localhost:4000/user/login',{
+        axios.post('http://localhost:3000/user/login',{
           email:email,
           password:password
         })
@@ -58,4 +58,5 @@ class Login extends React.Component {
       );
     }
   }
+  //bb
   export default withRouter(Login);
