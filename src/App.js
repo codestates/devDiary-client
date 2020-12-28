@@ -1,16 +1,14 @@
 import React from "react";
-
 import NavBar from "./component/NavBar"
 import {
   BrowserRouter as Router,
   Switch,
-  Route, 
-  Redirect, 
+  Route,
   withRouter
 } from "react-router-dom";
 import axios from "axios";
 import Login from"./component/Login"
-import Hi from"./component/hi"
+import Userinfo from "./component/Userinfo";
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
 
@@ -21,41 +19,37 @@ class App extends React.Component {
     isLogin: false,
     userinfo: null,
   };
-
   handleResponseSuccess() {
-    axios.get('http://localhost:4000/userinfo')
-    .then(param=>{
-      this.setState({ isLogin: true, userinfo: param.data });
-    })
-  
-  }            
-            
+    axios.get('http://localhost:4000/user/userinfo')
+      .then(param => {
+        this.setState({ isLogin: true, userinfo: param.data });
+      })
+
+  }
+
   render() {
-    const { isLogin, userinfo } = this.state;
-    
     return (
       <>
         <h1>hi every one</h1>
-        <NavBar isLogin={this.state.isLogin}></NavBar>
-      <Router>
-        <Switch>
-      <Route 
-          path='/login'
-          render={() => (
-            <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
-          )}
-        />
-        <Route exact path='/login' render={() => <Login />} />
-          <Route exact path="/">
-            <Main />
-          </Route>
-          <Route exact path="/user/signUp">
-            <SignUp />
-          </Route>
-        </Switch>
-      </Router>
-    </>
+        <Router>
+          <NavBar isLogin={this.state.isLogin}></NavBar>
+          <Switch>
+            <Route path='/user/login'>
+              <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
+            </Route>
+            <Route exact path="/user/userinfo">
+              <Userinfo />
+            </Route>
+            <Route exact path='/'>
+              <Main />
+            </Route>
+            <Route path='/user/signup'>
+              <SignUp />
+            </Route>
+          </Switch>
+        </Router>
+      </>
     );
   }
 }
-export default App;
+export default withRouter(App);
