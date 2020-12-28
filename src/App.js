@@ -1,13 +1,15 @@
 import React from "react";
+import NavBar from "./component/NavBar"
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
 import axios from "axios";
-
 import NavBar from "./component/NavBar"
-import Login from "./component/Login"
+import Login from"./component/Login"
+import Userinfo from "./component/Userinfo";
+import Hi from"./component/hi"
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
 
@@ -40,6 +42,9 @@ class App extends React.Component {
                 <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
               )}
             />
+            <Route exact path="/user/userinfo">
+              <Userinfo />
+            </Route>
             <Route exact path='/'> 
               <Main /> 
             </Route>
