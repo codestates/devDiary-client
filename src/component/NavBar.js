@@ -29,4 +29,5 @@ function NavBar({isLogin}){
       </>
     )
 }
+
 export default NavBar;
