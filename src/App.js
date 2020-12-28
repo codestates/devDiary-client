@@ -11,9 +11,7 @@ import Login from"./component/Login"
 import Userinfo from "./component/Userinfo";
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
-
 import "./App.css";
-
 class App extends React.Component {
   state = {
     isLogin: false,

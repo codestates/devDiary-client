@@ -1,16 +1,15 @@
 import React from "react";
 import {
-    BrowserRouter as Router,
     Link
   } from "react-router-dom";
 function NavBar({isLogin}){
     return(
-        <Router>
-            <Link id="logo" to="/">로고자리</Link>
+      <>
+        <Link id="logo" to="/">로고자리</Link>
         <nav id="nav">
-            <ul>
-                <li><Link to="/diary">자유게시판</Link></li>
-                <li><Link to="/question">질문게시판</Link></li>
+          <ul>
+            <li><Link to="/diary">자유게시판</Link></li>
+            <li><Link to="/question">질문게시판</Link></li>
                 {isLogin === true
                 ?(
                 <>
@@ -25,9 +24,9 @@ function NavBar({isLogin}){
                 </>
                 )
                 }
-            </ul>
+          </ul>
         </nav>
-        </Router>
+      </>
     )
 }
 
