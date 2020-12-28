@@ -3,10 +3,10 @@ import NavBar from "./component/NavBar"
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  withRouter
 } from "react-router-dom";
 import axios from "axios";
-import NavBar from "./component/NavBar"
 import Login from"./component/Login"
 import Userinfo from "./component/Userinfo";
 import Main from "./component/Main";
