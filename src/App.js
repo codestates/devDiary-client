@@ -9,7 +9,6 @@ import axios from "axios";
 import NavBar from "./component/NavBar"
 import Login from"./component/Login"
 import Userinfo from "./component/Userinfo";
-import Hi from"./component/hi"
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
 
@@ -20,7 +19,6 @@ class App extends React.Component {
     isLogin: false,
     userinfo: null,
   };
-
   handleResponseSuccess() {
     axios.get('http://localhost:4000/user/userinfo')
       .then(param => {
@@ -33,22 +31,19 @@ class App extends React.Component {
     return (
       <>
         <h1>hi every one</h1>
-        <NavBar isLogin={this.state.isLogin}></NavBar>
         <Router>
+          <NavBar isLogin={this.state.isLogin}></NavBar>
           <Switch>
-            <Route
-              path='/user/login'
-              render={() => (
-                <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
-              )}
-            />
+            <Route path='/user/login'>
+              <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
+            </Route>
             <Route exact path="/user/userinfo">
               <Userinfo />
             </Route>
-            <Route exact path='/'> 
-              <Main /> 
+            <Route exact path='/'>
+              <Main />
             </Route>
-            <Route exact path='/user/signup'>
+            <Route path='/user/signup'>
               <SignUp />
             </Route>
           </Switch>
@@ -57,4 +52,4 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+export default withRouter(App);
