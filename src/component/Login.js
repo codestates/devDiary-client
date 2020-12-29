@@ -21,13 +21,13 @@ class Login extends React.Component {
     handleLogin = () => {
       const { email, password} = this.state; //변수할당
       if(email&&password){ //다 채워져있으면 서버에보내기
-        axios.post('http://localhost:3000/user/login',{
+        axios.post('http://localhost:4000/user/login',{
           email:email,
           password:password
         },{ withCredentials: true })
-        .then((param)=>
-          this.props.handleResponseSuccess(param) //로그인 여부 바꾸는 함수 실행
-        ).then(()=>{
+        .then((param)=>{
+          this.props.handleResponseSuccess(param.data) //로그인 여부 바꾸는 함수 실행
+        }).then(()=>{
             this.props.history.push("/") // 메인화면으로 넘어가기
         }).catch(()=>{
           this.setState({errorMessage: '일치하는 회원 정보가 없습니다.'})
