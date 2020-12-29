@@ -7,7 +7,7 @@ class DeleteModal extends React.Component{
   constructor(props){
     super(props)
     this.state ={
-      deleteText:"탈퇴하지마세요 8ㅅ8",
+      deleteText:"탈퇴하지마세요..",
       copyText:"",
       errMsg:""
     }
@@ -41,7 +41,7 @@ class DeleteModal extends React.Component{
       <div className='deleteModal' onClick={this.props.deleteUserInfo} >
         <div className='container' onClick={(e)=>e.stopPropagation()}>
           <span>탈퇴하려면 아래 문구를 입력창에 작성해주세요</span>
-          <h2>탈퇴하지마세요 8ㅅ8</h2>
+          <h2>탈퇴하지마세요..</h2>
           <input type='text' onChange={this.handleInputValue}></input>
           <div>{this.state.errMsg}</div>
           <button onClick={this.clickDelete}>진짜 탈퇴하기</button>

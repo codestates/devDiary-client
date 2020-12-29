@@ -11,11 +11,15 @@ import Login from"./component/Login"
 import Userinfo from "./component/Userinfo";
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
+import UpdateUserInfo from "./component/UpdateUserInfo";
 import "./App.css";
 class App extends React.Component {
   state = {
     isLogin: false,
-    userinfo: null,
+    userinfo: {
+      email:'kdonv@gmail.com',
+      username:'cjso'
+    },
   };
   handleResponseSuccess() {
     axios.get('http://localhost:4000/user/userinfo')
@@ -43,6 +47,9 @@ class App extends React.Component {
             </Route>
             <Route path='/user/signup'>
               <SignUp />
+            </Route>
+            <Route path='/user/updateUserinfo'>
+              <UpdateUserInfo userinfo={this.state.userinfo}/>
             </Route>
           </Switch>
         </Router>
