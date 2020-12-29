@@ -14,10 +14,7 @@ import "./App.css";
 class App extends React.Component {
   state = {
     isLogin: false,
-    userinfo: {
-      email:'kdonv@gmail.com',
-      username:'cjso'
-    },
+    userinfo: null,
   };
   handleResponseSuccess(param) {
         this.setState({
