@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "./component/NavBar"
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,13 +20,15 @@ class App extends React.Component {
       username:''
     },
   };
-  handleResponseSuccess() {
-    axios.get('http://localhost:4000/user/userinfo')
-      .then(param => {
-        this.setState({ isLogin: true, userinfo: param.data });
-      })
-
-  }
+  handleResponseSuccess(param) {
+        this.setState({
+          isLogin: true,
+          userinfo: {
+            email:param.email,
+            username:param.username
+          }});
+      }
+  
 
   render() {
     return (

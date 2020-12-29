@@ -14,15 +14,21 @@ class Login extends React.Component {
     handleInputValue = (key) => (e) => {
       this.setState({ [key]: e.target.value });
     };
+
+    this.handleInputValue = this.handleInputValue.bind(this);
+  }
+    handleInputValue = (key) => (e) => {
+      this.setState({ [key]: e.target.value });
+    };
     handleLogin = () => {
       const { email, password} = this.state; //변수할당
       if(email&&password){ //다 채워져있으면 서버에보내기
-        axios.post('http://localhost:4000/user/login',{
+        axios.post('http://localhost:3000/user/login',{
           email:email,
           password:password
-        })
-        .then(()=>
-          this.props.handleResponseSuccess() //로그인 여부 바꾸는 함수 실행
+        },{ withCredentials: true })
+        .then((param)=>
+          this.props.handleResponseSuccess(param) //로그인 여부 바꾸는 함수 실행
         ).then(()=>{
             this.props.history.push("/") // 메인화면으로 넘어가기
         }).catch(()=>{
@@ -32,6 +38,7 @@ class Login extends React.Component {
         this.setState({errorMessage: '이메일과 비밀번호는 필수입니다.'})
       }
     };
+  
     //36 -> 다음페이지로 넘어가는 모션 취소 자세한건 12.23 노션참조
     render() {
       return (
