@@ -17,8 +17,8 @@ class App extends React.Component {
   state = {
     isLogin: false,
     userinfo: {
-      email:'kdonv@gmail.com',
-      username:'cjso'
+      email:'',
+      username:''
     },
   };
   handleResponseSuccess() {
@@ -34,7 +34,7 @@ class App extends React.Component {
       <>
         <h1>hi every one</h1>
         <Router>
-          <NavBar isLogin={this.state.isLogin}></NavBar>
+          <NavBar isLogin={this.state.isLogin} username={this.state.userinfo.username}></NavBar>
           <Switch>
             <Route path='/user/login'>
               <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
