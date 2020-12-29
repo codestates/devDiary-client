@@ -35,11 +35,10 @@ class WritingContent extends React.Component {
     } else {
       this.setState({ errorMessage: "" });
       axios.post(`http://localhost:4000/${board}/${todo}`, {
-        id: id,
         title: title,
         content: content,
         tags: tags,
-      })
+      },{withCredentials:true})
         .then(() => {
           this.props.history.push(`/${board}`);
         })

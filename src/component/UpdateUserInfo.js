@@ -8,7 +8,7 @@ class UpdateUserInfo extends React.Component {
     this.state = {
       checked: null, // 안건드리면 null 중복이면 false 중복아니면 true
       oldPWcheck: false,
-      username: "",
+      username: "johnson",
       oldPassword: "",
       newPassword: "",
       newPasswordCheck: "",
@@ -17,6 +17,8 @@ class UpdateUserInfo extends React.Component {
       isComplete:false
     };
     this.handleInputValue = this.handleInputValue.bind(this);
+    this.checkUsername = this.checkUsername.bind(this);
+    this.checkPassword = this.checkPassword.bind(this);
   }
   handleInputValue = (key) => (e) => {
     this.setState({ [key]: e.target.value });
@@ -24,17 +26,17 @@ class UpdateUserInfo extends React.Component {
       setTimeout(this.checkPassword, 100); //! 비밀번호가 입력되면 작동, 왜인지 모르지만 타임아웃이 필요하다고 하네요
     }
   };
-  checkUsername() {
+  checkUsername = () => {
     const username = this.state.username;
     if (username === "" || username === this.props.userinfo.username) {
       this.setState({ errorMsg: '현재 닉네임과 동일한 닉네임입니다' })
     }
     axios.post("http://localhost:4000/user/checkUsername", { username:username })
       .then((param) => {
-        if (param) {
+        if (param.data.message==="invalid") {
           this.setState({ checked: false })
           this.setState({ errorMsg: '사용중인 닉네임입니다' })
-        } else {
+        } else if(param.data.message==="valid"){
           this.setState({ checked: true })
           this.setState({ errorMsg: '사용가능한 닉네임입니다' })
         }
@@ -48,12 +50,14 @@ class UpdateUserInfo extends React.Component {
       this.setState({ errorMsg: '비밀번호를 변경하려면 새 비밀번호와 비밀번호확인을 입력해야 합니다' })//새비번이나 비번확인 없을 때
     } else if (newPassword!==newPasswordCheck) {              
       this.setState({ errorMsg: '새 비밀번호와 새 비밀번호 확인이 일치하지 않습니다' })//새비번 비번확인 다를 때
+    } else if (newPassword===newPasswordCheck){
+      this.setState({ errorMsg: '새 비밀번호와 새 비밀번호 확인이 일치합니다' })
     }
   };
   submitUserinfo = () => { //! 제출버튼 누르면 실행되는 함수
     const email = this.props.userinfo.email
     const { checked, username, oldPassword, newPassword, newPasswordCheck, oldPWcheck } = this.state;
-    let body
+    let body;
 
     if (checked === null && !oldPassword && !newPassword && !newPasswordCheck) {  
       this.setState({ errorMsg: '변경 할 정보가 없습니다' })      //변경사항 없을 때
@@ -61,7 +65,7 @@ class UpdateUserInfo extends React.Component {
       this.setState({ errorMsg: '닉네임 중복체크가 되지 않았습니다' })//닉넴 중복체크 안했을 때
     }
     else if (oldPassword) {//현재 비번이 채워져있으면 일치여부 확인
-      axios.post('http://localhost:3000/checkPassword', {
+      axios.post('http://localhost:4000/user/checkPassword', {
         oldPassword: oldPassword
       })
         .then(() => {//현재비번 맞을 때
@@ -91,7 +95,7 @@ class UpdateUserInfo extends React.Component {
         newPassword: newPassword
       }
     }
-    axios.post('http://localhost:3000/user/updateUserinfo', body)
+    axios.post('http://localhost:4000/user/updateUserinfo', body, {withCredentials:true})
         .then(() => {
           console.log('회원정보가 변경되었습니다')
         })

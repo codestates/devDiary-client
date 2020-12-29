@@ -35,17 +35,17 @@ class App extends React.Component {
 
   handleDiaryPost(id) {
     axios.get(`http://localhost:4000/diary/updatePost/${id}`)
-      .then(param => {
-        this.setState({ preData: param.data });
-        this.props.history.push(`/diary/updatePost/${id}`);
-      })
+    .then(param => {
+      this.setState({ preData: param.data });
+      this.props.history.push(`/diary/updatePost/${id}`);
+    })
   }
   handleQuestionPost(id) {
     axios.get(`http://localhost:4000/question/updatePost/${id}`)
-      .then(param => {
-        this.setState({ preData: param.data });
-        this.props.history.push(`/question/updatePost/${id}`);
-      })
+    .then(param => {
+      this.setState({ preData: param.data });
+      this.props.history.push(`/question/updatePost/${id}`);
+    })
   }
 
   render() {
@@ -72,9 +72,6 @@ class App extends React.Component {
             </Route>
             <Route path="/question/newPost">
               <WritingContent />
-            </Route>
-            <Route path="/question/updatePost">
-              <WritingContent preData={this.state.preData} />
             </Route>
             <Route path="/question/updatePost">
               <WritingContent preData={this.state.preData} />
