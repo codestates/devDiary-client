@@ -2,7 +2,7 @@ import React from "react";
 import {
     Link
   } from "react-router-dom";
-function NavBar({isLogin}){
+function NavBar({isLogin, username}){
     return(
       <>
         <Link id="logo" to="/">로고자리</Link>
@@ -15,6 +15,7 @@ function NavBar({isLogin}){
                 <>
                 <li><Link to="/user/userinfo">마이페이지</Link></li>
                 <li><Link to="/user/logout">로그아웃</Link></li>
+                <p>{username}님</p>
                 </>
                 )
                 :(
