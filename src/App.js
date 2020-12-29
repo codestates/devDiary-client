@@ -1,32 +1,34 @@
 import React from "react";
-
 import NavBar from "./component/NavBar"
 import {
   BrowserRouter as Router,
   Switch,
-  Route, 
-  Redirect, 
+  Route,
   withRouter
 } from "react-router-dom";
 import axios from "axios";
 import Login from"./component/Login"
-import Hi from"./component/hi"
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
-
 import "./App.css";
-
 class App extends React.Component {
   state = {
     isLogin: false,
-    userinfo: null,
+    userinfo: {
+      email:'kdonv@gmail.com',
+      username:'cjso'
+    },
   };
-  handleResponseSuccess() {
-    axios.get('http://localhost:4000/user/userinfo')
-      .then(param => {
-        this.setState({ isLogin: true, userinfo: param.data });
-      })
-  }
+  handleResponseSuccess(param) {
+        this.setState({
+          isLogin: true,
+          userinfo: {
+            email:param.email,
+            username:param.username
+          }});
+      }
+  
+
   render() {
     return (
       <>

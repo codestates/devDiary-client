@@ -20,9 +20,9 @@ class Login extends React.Component {
         axios.post('http://localhost:3000/user/login',{
           email:email,
           password:password
-        })
-        .then(()=>
-          this.props.handleResponseSuccess() //로그인 여부 바꾸는 함수 실행
+        },{ withCredentials: true })
+        .then((param)=>
+          this.props.handleResponseSuccess(param) //로그인 여부 바꾸는 함수 실행
         ).then(()=>{
             this.props.history.push("/") // 메인화면으로 넘어가기
         }).catch(()=>{
