@@ -15,7 +15,9 @@ import "./App.css";
 class App extends React.Component {
   state = {
     isLogin: false,
-    userinfo: null,
+    userinfo: {
+      username:'chacha'
+    },
   };
   handleResponseSuccess() {
     axios.get('http://localhost:4000/user/userinfo')
@@ -30,7 +32,7 @@ class App extends React.Component {
       <>
         <h1>hi every one</h1>
         <Router>
-          <NavBar isLogin={this.state.isLogin}></NavBar>
+          <NavBar isLogin={this.state.isLogin} username={this.state.userinfo.username}></NavBar>
           <Switch>
             <Route path='/user/login'>
               <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
