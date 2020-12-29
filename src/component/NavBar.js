@@ -1,28 +1,33 @@
-function NavBar({isLogin}){
+import React from "react";
+import {
+    Link
+  } from "react-router-dom";
+function NavBar({isLogin, username}){
     return(
-        <>
-        <a id="logo" href="http://localhost:3000">로고자리</a>
+      <>
+        <Link id="logo" to="/">로고자리</Link>
         <nav id="nav">
-            <ul>
-                <li><a href="http://localhost:3000">자유게시판</a></li>
-                <li><a href="http://localhost:3000">질문게시판</a></li>
+          <ul>
+            <li><Link to="/diary">자유게시판</Link></li>
+            <li><Link to="/question">질문게시판</Link></li>
                 {isLogin === true
                 ?(
                 <>
-                <li><a href="http://localhost:3000">마이페이지</a></li>
-                <li><a href="http://localhost:3000">로그아웃</a></li>
+                <li><Link to="/user/userinfo">마이페이지</Link></li>
+                <li><Link to="/user/logout">로그아웃</Link></li>
+                <p>{username}님</p>
                 </>
                 )
                 :(
                 <>
-                <li><a href="http://localhost:3000">회원가입</a></li>
-                <li><a href="http://localhost:3000">로그인</a></li>
+                <li><Link to="/user/signup">회원가입</Link></li>
+                <li><Link to="/user/login">로그인</Link></li>
                 </>
                 )
                 }
-            </ul>
+          </ul>
         </nav>
-        </>
+      </>
     )
 }
 

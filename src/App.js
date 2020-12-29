@@ -1,6 +1,4 @@
 import React from "react";
-
-import NavBar from "./component/NavBar"
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,9 +11,9 @@ import Login from "./component/Login"
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
 import WritingContent from "./component/WritingContent";
-
+import Userinfo from "./component/Userinfo";
+import UpdateUserInfo from "./component/UpdateUserInfo";
 import "./App.css";
-
 class App extends React.Component {
   state = {
     isLogin: false,
@@ -49,8 +47,8 @@ class App extends React.Component {
     return (
       <>
         <h1>hi every one</h1>
-        <NavBar isLogin={this.state.isLogin}></NavBar>
         <Router>
+        <NavBar isLogin={this.state.isLogin} username={this.state.userinfo.username}></NavBar>
           <Switch>
             <Route
               path='/login'
@@ -65,7 +63,9 @@ class App extends React.Component {
             <Route exact path="/user/signUp">
               <SignUp />
             </Route>
-
+            <Route exact path="/user/userinfo">
+              <Userinfo />
+            </Route>
             <Route path="/diary/newPost">
               <WritingContent />
             </Route>
@@ -78,11 +78,13 @@ class App extends React.Component {
             <Route path="/question/updatePost">
               <WritingContent preData={this.state.preData} />
             </Route>
-
+            <Route path='/user/updateUserinfo'>
+              <UpdateUserInfo userinfo={this.state.userinfo}/>
+            </Route>
           </Switch>
         </Router>
       </>
     );
   }
 }
-export default App;
+export default withRouter(App);
