@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import Login from"./component/Login"
+import NavBar from"./component/NavBar"
 import Userinfo from "./component/Userinfo";
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";

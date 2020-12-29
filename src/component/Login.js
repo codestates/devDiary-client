@@ -14,9 +14,7 @@ class Login extends React.Component {
     handleInputValue = (key) => (e) => {
       this.setState({ [key]: e.target.value });
     };
-
-    this.handleInputValue = this.handleInputValue.bind(this);
-  }
+  
     handleInputValue = (key) => (e) => {
       this.setState({ [key]: e.target.value });
     };
