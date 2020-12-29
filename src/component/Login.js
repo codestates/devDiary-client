@@ -9,6 +9,12 @@ class Login extends React.Component {
       password: "",
       errorMessage: ""
     };
+
+    this.handleInputValue = this.handleInputValue.bind(this);
+  }
+    handleInputValue = (key) => (e) => {
+      this.setState({ [key]: e.target.value });
+    };
     handleLogin = () => {
       const { email, password} = this.state; //변수할당
       if(email&&password){ //다 채워져있으면 서버에보내기
@@ -27,6 +33,7 @@ class Login extends React.Component {
         this.setState({errorMessage: '이메일과 비밀번호는 필수입니다.'})
       }
     };
+  
     //36 -> 다음페이지로 넘어가는 모션 취소 자세한건 12.23 노션참조
     render() {
       return (
@@ -51,5 +58,6 @@ class Login extends React.Component {
         </form>
       </div>
     );
+      }
   }
   export default withRouter(Login);
