@@ -16,7 +16,7 @@ class Signup extends React.Component {
       lastPassword: "",
       passwordMessage: "",
       password: "",
-      
+
       username: "",
       usernameChecked: false,
       usernameMessage: "",
@@ -57,77 +57,77 @@ class Signup extends React.Component {
 
   checkEmail = () => {
     function isEmail(asValue) {
-      let regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+      let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
       return regExp.test(asValue);
     }
     const { email } = this.state;
-    if(!email) {
+    if (!email) {
       this.setState({
         emailMessage: "이메일을 입력 해 주세요"
       })
-    } else if(!isEmail(email)) {
+    } else if (!isEmail(email)) {
       this.setState({
         emailMessage: "이메일 형식이 올바르지 않습니다"
       })
     } else {
-      axios.post("localhost:3000/user/checkEmail", {
+      axios.post("http://localhost:4000/user/checkEmail", {
         email: email
       })
-      .then(res => {
-        if(res.data) {
-           this.setState({
-            emailMessage: "이미 가입된 이메일 입니다"
-           })
-        } else {
-          this.setState({
-            emailMessage: "사용 가능한 이메일 입니다",
-            emailChecked: true
-          });
-        }
-      })
+        .then(res => {
+          if (res.data) {
+            this.setState({
+              emailMessage: "이미 가입된 이메일 입니다"
+            })
+          } else {
+            this.setState({
+              emailMessage: "사용 가능한 이메일 입니다",
+              emailChecked: true
+            });
+          }
+        })
     }
   }
 
   checkUsername = () => {
     const { username } = this.state;
-    if(username === "") {
+    if (username === "") {
       this.setState({
         usernameMessage: "닉네임을 입력 해 주세요"
-       })
+      })
     } else {
-      axios.post("localhost:3000/user/checkUsername", {
+      axios.post("http://localhost:4000/user/checkUsername", {
         username: username
       })
-      .then(res => {
-        if(res.data) {
-           this.setState({
-            usernameMessage: "사용 중인 닉네임 입니다"
-           })
-        } else {
-          this.setState({
-            usernameMessage: "사용 가능한 닉네임 입니다",
-            usernameChecked: true
-          });
-        }
-      })
+        .then(res => {
+          if (res.data) {
+            this.setState({
+              usernameMessage: "사용 중인 닉네임 입니다"
+            })
+          } else {
+            this.setState({
+              usernameMessage: "사용 가능한 닉네임 입니다",
+              usernameChecked: true
+            });
+          }
+        })
     }
   }
 
   handleSignup = () => {
     const { username, password, email, emailChecked, usernameChecked } = this.state;
-    if(!username || !password || !email) {
+    if (!username || !password || !email) {
       this.setState({ errorMessage: "모든 항목은 필수입니다" });
-    } else if(!emailChecked || !usernameChecked) {
+    } else if (!emailChecked || !usernameChecked) {
       this.setState({ errorMessage: "이메일과 닉네임 중복 확인을 해주세요" });
     } else {
-      axios.post("localhost:3000/user/signup", {
+      axios.post("http://localhost:4000/user/signup", {
         username: username,
         password: password,
         email: email
       })
-      .then(() => {
-        this.props.history.push("/user/login");
-      });
+        .then(() => {
+          this.props.history.push("/user/login");
+        });
     }
   }
 
@@ -148,7 +148,7 @@ class Signup extends React.Component {
                 type="submit"
                 onClick={this.checkEmail}
               >중복확인</button>
-              <span className="alert-box">{ emailMessage }</span>
+              <span className="alert-box">{emailMessage}</span>
             </div>
             <div>
               <span>비밀번호</span>
@@ -167,7 +167,7 @@ class Signup extends React.Component {
                 onChange={this.handleInputValue("lastPassword")}
                 value={lastPassword}
               />
-              <span className="alert-box">{ passwordMessage }</span>
+              <span className="alert-box">{passwordMessage}</span>
             </div>
             <div>
               <span>닉네임</span>
@@ -179,12 +179,12 @@ class Signup extends React.Component {
                 type="submit"
                 onClick={this.checkUsername}
               >중복확인</button>
-              <span className="alert-box">{ usernameMessage }</span>
+              <span className="alert-box">{usernameMessage}</span>
             </div>
             <div>
-              <Link to="/login">이미 아이디가 있으신가요?</Link>
+              <Link to="/user/login">이미 아이디가 있으신가요?</Link>
             </div>
-            <div className="alert-box">{ errorMessage }</div>
+            <div className="alert-box">{errorMessage}</div>
             <button
               className="btn btn-signup"
               type="submit"
