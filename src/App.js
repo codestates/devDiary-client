@@ -6,16 +6,19 @@ import {
   withRouter
 } from "react-router-dom";
 import axios from "axios";
-import NavBar from "./component/NavBar"
 import Login from"./component/Login"
 import Userinfo from "./component/Userinfo";
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
+import UpdateUserInfo from "./component/UpdateUserInfo";
 import "./App.css";
 class App extends React.Component {
   state = {
     isLogin: false,
-    userinfo: null,
+    userinfo: {
+      email:'',
+      username:''
+    },
   };
   handleResponseSuccess(param) {
         this.setState({
@@ -32,7 +35,7 @@ class App extends React.Component {
       <>
         <h1>hi every one</h1>
         <Router>
-          <NavBar isLogin={this.state.isLogin}></NavBar>
+          <NavBar isLogin={this.state.isLogin} username={this.state.userinfo.username}></NavBar>
           <Switch>
             <Route path='/user/login'>
               <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
@@ -45,6 +48,9 @@ class App extends React.Component {
             </Route>
             <Route path='/user/signup'>
               <SignUp />
+            </Route>
+            <Route path='/user/updateUserinfo'>
+              <UpdateUserInfo userinfo={this.state.userinfo}/>
             </Route>
           </Switch>
         </Router>
