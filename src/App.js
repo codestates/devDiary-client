@@ -76,6 +76,18 @@ class App extends React.Component {
         });
       })
   }
+  componentDidMount(){
+    if(window.sessionStorage.isLogin){
+      this.setState({
+        isLogin:true,
+        userinfo:{
+          email:window.sessionStorage.email,
+          username:window.sessionStorage.username,
+        }
+      })
+    }
+  }
+  
   render() {
     return (
       <>

@@ -10,7 +10,6 @@ class Login extends React.Component {
         errorMessage: ""
       };
       this.handleInputValue = this.handleInputValue.bind(this);
-      this.saveSession = this.saveSession.bind(this);
     }
 
     handleInputValue = (key) => (e) => {
@@ -25,7 +24,9 @@ class Login extends React.Component {
         },{ withCredentials: true })
         .then((param)=>{
           this.props.handleResponseSuccess(param.data)//로그인 여부 바꾸는 함수 실행
-          this.saveSession() 
+          window.sessionStorage.email = param.data.email //세션저장
+          window.sessionStorage.username = param.data.username
+          window.sessionStorage.isLogin = true
         }).then(()=>{
             this.props.history.push("/") // 메인화면으로 넘어가기
         }).catch(()=>{
@@ -35,10 +36,6 @@ class Login extends React.Component {
         this.setState({errorMessage: '이메일과 비밀번호는 필수입니다.'})
       }
     };
-    saveSession = () =>{
-      const {email} = this.state;
-      window.sessionStorage.setItem('email', email);
-    }
   
     //36 -> 다음페이지로 넘어가는 모션 취소 자세한건 12.23 노션참조
     render() {
