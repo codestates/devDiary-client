@@ -9,10 +9,10 @@ class WritingContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.preData ? this.props.preData.id : "",
-      title: this.props.preData ? this.props.preData.title : "",
-      content: this.props.preData ? this.props.preData.content : "",
-      tags: this.props.preData ? this.props.preData.tags : "",
+      id: this.props.singleContent ? this.props.singleContent.id : "",
+      title: this.props.singleContent ? this.props.singleContent.title : "",
+      content: this.props.singleContent ? this.props.singleContent.content : "",
+      tags: this.props.singleContent ? this.props.singleContent.tags : "",
       errorMessage: "",
     }
     this.handleInputValue = this.handleInputValue.bind(this);
@@ -28,7 +28,7 @@ class WritingContent extends React.Component {
   handleSubmit = () => {
     const { id, title, content, tags } = this.state;
     const board = window.location.href.split("/")[3]; // 게시판 이름
-    const todo = this.props.preData ? `updatePost/${id}` : "newPost"; // 수정/id or 작성
+    const todo = this.props.singleContent ? `updatePost/${id}` : "newPost"; // 수정/id or 작성
     console.log(`board: ${board}, todo: ${todo}`);
     if (!title || !content) {
       this.setState({ errorMessage: "제목과 내용은 필수입니다" });
@@ -38,7 +38,7 @@ class WritingContent extends React.Component {
         title: title,
         content: content,
         tags: tags,
-      },{withCredentials:true})
+      })
         .then(() => {
           this.props.history.push(`/${board}`);
         })
