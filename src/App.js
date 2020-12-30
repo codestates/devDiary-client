@@ -3,49 +3,69 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
   withRouter
 } from "react-router-dom";
 import axios from "axios";
-import Login from"./component/Login"
-import NavBar from"./component/NavBar"
+
+import Login from "./component/Login"
+import NavBar from "./component/NavBar"
 import Userinfo from "./component/Userinfo";
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
 import WritingContent from "./component/WritingContent";
 import UpdateUserInfo from "./component/UpdateUserInfo";
+import Content from "./component/Content";
+
 import "./App.css";
+
 class App extends React.Component {
   state = {
     isLogin: false,
     userinfo: {
-      username:"test1",
-      email:"test11@naver.com"
+      email: null,
+      username: null,
     },
-    preData: null,
+    userContents: {
+      diary: null,
+      question: null,
+    },
+    singleContent: {
+      title: null,
+      content: null,
+      likes: null,
+      comments: null,
+      createdAt: null,
+      writer: null,
+      hadLiked: null,
+    },
   };
 
   handleResponseSuccess(param) {
-    this.setState({ isLogin: true, userinfo: {
-        username:param.username,
-        email:param.email
+    this.setState({
+      isLogin: true,
+      userinfo: {
+        username: param.username,
+        email: param.email
       }
     });
   }
 
-  handleDiaryPost(id) {
-    axios.get(`http://localhost:4000/diary/updatePost/${id}`)
-    .then(param => {
-      this.setState({ preData: param.data });
-      this.props.history.push(`/diary/updatePost/${id}`);
-    })
+  handlePost(board, id) {
+    axios.get(`http://localhost:4000/${board}/${id}`)
+      .then(param => {
+        this.setState({ singleContent: param.data });
+      })
   }
-  handleQuestionPost(id) {
-    axios.get(`http://localhost:4000/question/updatePost/${id}`)
-    .then(param => {
-      this.setState({ preData: param.data });
-      this.props.history.push(`/question/updatePost/${id}`);
-    })
+  getUserinfo() {
+    axios.get("http://localhost:4000/user/userinfo")
+      .then(param => {
+        this.setState({
+          userContents: {
+            diary: param.data.diarys,
+            question: param.data.questions
+          }
+        });
+      })
   }
 
   render() {
@@ -53,7 +73,11 @@ class App extends React.Component {
       <>
         <h1>hi every one</h1>
         <Router>
-        <NavBar isLogin={this.state.isLogin} username={this.state.userinfo.username}></NavBar>
+          <NavBar
+            isLogin={this.state.isLogin}
+            username={this.state.userinfo.username}
+            getUserinfo={this.getUserinfo}
+          />
           <Switch>
             <Route path='/user/login'>
               <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
@@ -65,24 +89,51 @@ class App extends React.Component {
               <SignUp />
             </Route>
             <Route exact path="/user/userinfo">
-              <Userinfo />
+              <Userinfo
+                userinfo={this.state.userinfo}
+                userContents={this.state.userContents}
+                handlePost={this.handlePost}
+              />
             </Route>
+            <Route path='/user/updateUserinfo/:id'>
+              <UpdateUserInfo userinfo={this.state.userinfo} />
+            </Route>
+
             <Route path="/diary/newPost">
-              <WritingContent />
+              <WritingContent singleContent={this.state.singleContent} />
             </Route>
             <Route path="/question/newPost">
-              <WritingContent />
+              <WritingContent singleContent={this.state.singleContent} />
             </Route>
-            <Route path="/question/updatePost">
-              <WritingContent preData={this.state.preData} />
+            <Route path="/diary/updatePost/:id">
+              <WritingContent singleContent={this.state.singleContent} />
             </Route>
-            <Route path='/user/updateUserinfo'>
-              <UpdateUserInfo userinfo={this.state.userinfo}/>
+            <Route path="/question/updatePost/:id">
+              <WritingContent singleContent={this.state.singleContent} />
             </Route>
+
+            <Route path="/diary/:id">
+              <Content
+                isLogin={this.state.isLogin}
+                username={this.state.userinfo.username}
+                singleContent={this.state.singleContent}
+                handlePost={this.handlePost}
+              />
+            </Route>
+            <Route path="/question/:id">
+              <Content
+                isLogin={this.state.isLogin}
+                username={this.state.userinfo.username}
+                singleContent={this.state.singleContent}
+                handlePost={this.handlePost}
+              />
+            </Route>
+
           </Switch>
         </Router>
       </>
     );
   }
 }
+
 export default withRouter(App);
