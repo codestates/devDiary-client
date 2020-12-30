@@ -39,7 +39,6 @@ class App extends React.Component {
       hadLiked: null,
     },
   };
-
   handleResponseSuccess(param) {
     this.setState({
       isLogin: true,
@@ -49,12 +48,16 @@ class App extends React.Component {
       }
     });
   }
-
-  handlePost(board, id) {
-    axios.get(`http://localhost:4000/${board}/${id}`)
-      .then(param => {
-        this.setState({ singleContent: param.data });
-      })
+  handleLogout(){
+    this.setState({isLogin:false})
+    window.sessionStorage.clear();
+  }
+  handleDiaryPost(id) {
+    axios.get(`http://localhost:4000/diary/updatePost/${id}`)
+    .then(param => {
+      this.setState({ preData: param.data });
+      this.props.history.push(`/diary/updatePost/${id}`);
+    })
   }
   getUserinfo() {
     axios.get("http://localhost:4000/user/userinfo")
@@ -67,17 +70,19 @@ class App extends React.Component {
         });
       })
   }
-
   render() {
     return (
       <>
         <h1>hi every one</h1>
         <Router>
-          <NavBar
-            isLogin={this.state.isLogin}
-            username={this.state.userinfo.username}
-            getUserinfo={this.getUserinfo}
-          />
+        {this.state.isLogin === true
+                ?(
+                  <NavBar isLogin={this.state.isLogin} username={this.state.userinfo.username} handleLogout={this.handleLogout.bind(this) getUserinfo={this.getUserinfo}}></NavBar>
+                )
+                :(
+                  <NavBar isLogin={this.state.isLogin}></NavBar>
+                )
+                }
           <Switch>
             <Route path='/user/login'>
               <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
@@ -135,5 +140,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default withRouter(App);

@@ -1,28 +1,30 @@
 import React from "react";
 import {
-  useHistory,
-  Link
-} from "react-router-dom";
-function NavBar({ isLogin, username, getUserinfo }) {
+    Link,
+    useHistory,
+  } from "react-router-dom";
+
+function NavBar({isLogin, username, getUserinfo, handleLogout}){
   const history = useHistory();
   const handleClick = () => {
     getUserinfo()
       .then(() => {
         history.push("/user/userinfo");
       })
-  }
-  return (
-    <>
-      <Link id="logo" to="/">로고자리</Link>
-      <nav id="nav">
-        <ul>
-          <li><Link to="/diary">자유게시판</Link></li>
-          <li><Link to="/question">질문게시판</Link></li>
-          {isLogin === true
-            ? (
-              <>
+    }
+    return(
+      <>
+        <Link id="logo" to="/">로고자리</Link>
+        <nav id="nav">
+          <ul>
+            <li><Link to="/diary">자유게시판</Link></li>
+            <li><Link to="/question">질문게시판</Link></li>
+                {isLogin === true
+                ?(
+                <>
                 <li><Link onClick={handleClick}>마이페이지</Link></li>
-                <li><Link to="/user/logout">로그아웃</Link></li>
+                <li><Link to="/user/logout" onClick={handleLogout}>로그아웃</Link></li>
+  
                 <p>{username}님</p>
               </>
             )
@@ -38,5 +40,4 @@ function NavBar({ isLogin, username, getUserinfo }) {
     </>
   )
 }
-
 export default NavBar;
