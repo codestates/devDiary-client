@@ -60,7 +60,7 @@ class UpdateUserInfo extends React.Component {
     const { checked, username, oldPassword, newPassword, newPasswordCheck, oldPWcheck } = this.state;
     let body;
 
-    if (checked === null && !oldPassword && !newPassword && !newPasswordCheck) {  
+    if (this.state.checked === null && !oldPassword && !newPassword && !newPasswordCheck) {  
       this.setState({ errorMsg: '변경 할 정보가 없습니다' })      //변경사항 없을 때
     } else if (checked === false) {                       
       this.setState({ errorMsg: '닉네임 중복체크가 되지 않았습니다' })//닉넴 중복체크 안했을 때
