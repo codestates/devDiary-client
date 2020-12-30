@@ -28,9 +28,9 @@ class UpdateUserInfo extends React.Component {
   };
   checkUsername = () => {
     const username = this.state.username;
-    if (username === "" || username === this.props.userinfo.username) {
+    if (this.state.checked === null || username === this.props.userinfo.username) {
       this.setState({ errorMsg: '현재 닉네임과 동일한 닉네임입니다' })
-    }
+    }else{
     axios.post("http://localhost:4000/user/checkUsername", { username:username })
       .then((param) => {
         if (param.data.message==="invalid") {
@@ -41,6 +41,7 @@ class UpdateUserInfo extends React.Component {
           this.setState({ errorMsg: '사용가능한 닉네임입니다' })
         }
       })
+    }
   }
   checkPassword = () => { //! 비번입력창에 입력하기 시작하면 실행되는 함수
     const { oldPassword, newPassword, newPasswordCheck} = this.state;
@@ -59,7 +60,7 @@ class UpdateUserInfo extends React.Component {
     const { checked, username, oldPassword, newPassword, newPasswordCheck, oldPWcheck } = this.state;
     let body;
 
-    if (checked === null && !oldPassword && !newPassword && !newPasswordCheck) {  
+    if (this.state.checked === null && !oldPassword && !newPassword && !newPasswordCheck) {  
       this.setState({ errorMsg: '변경 할 정보가 없습니다' })      //변경사항 없을 때
     } else if (checked === false) {                       
       this.setState({ errorMsg: '닉네임 중복체크가 되지 않았습니다' })//닉넴 중복체크 안했을 때
