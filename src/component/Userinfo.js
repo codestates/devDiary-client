@@ -7,10 +7,10 @@ function Userinfo({ userinfo, userContents, handlePost }) {
     history.push("/user/updateUserinfo");
   }
   function getContent(board, id) {
-    handlePost(board, id)
-      .then(() => {
+    handlePost(board, id);
+      // .then(() => {
         history.push(`/${board}/${id}`);
-      })
+      // })
   }
   //* 서버 응답 형태에 따라 바뀔 수 있음 ↓
   const diary = userContents.diary;

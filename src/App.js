@@ -48,6 +48,12 @@ class App extends React.Component {
       }
     });
   }
+  handlePost(board, id) {
+    axios.get(`http://localhost:4000/${board}/${id}`)
+      .then(param => {
+        this.setState({ singleContent: param.data });
+      })
+  }
   handleLogout(){
     this.setState({isLogin:false})
     window.sessionStorage.clear();
@@ -77,7 +83,7 @@ class App extends React.Component {
         <Router>
         {this.state.isLogin === true
                 ?(
-                  <NavBar isLogin={this.state.isLogin} username={this.state.userinfo.username} handleLogout={this.handleLogout.bind(this)} getUserinfo={this.getUserinfo}></NavBar>
+                  <NavBar isLogin={this.state.isLogin} username={this.state.userinfo.username} handleLogout={this.handleLogout.bind(this)} getUserinfo={this.getUserinfo.bind(this)}></NavBar>
                 )
                 :(
                   <NavBar isLogin={this.state.isLogin}></NavBar>
@@ -97,7 +103,7 @@ class App extends React.Component {
               <Userinfo
                 userinfo={this.state.userinfo}
                 userContents={this.state.userContents}
-                handlePost={this.handlePost}
+                handlePost={this.handlePost.bind(this)}
               />
             </Route>
             <Route path='/user/updateUserinfo/:id'>
@@ -122,7 +128,7 @@ class App extends React.Component {
                 isLogin={this.state.isLogin}
                 username={this.state.userinfo.username}
                 singleContent={this.state.singleContent}
-                handlePost={this.handlePost}
+                handlePost={this.handlePost.bind(this)}
               />
             </Route>
             <Route path="/question/:id">
@@ -130,7 +136,7 @@ class App extends React.Component {
                 isLogin={this.state.isLogin}
                 username={this.state.userinfo.username}
                 singleContent={this.state.singleContent}
-                handlePost={this.handlePost}
+                handlePost={this.handlePost.bind(this)}
               />
             </Route>
 
