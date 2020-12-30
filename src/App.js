@@ -77,12 +77,12 @@ class App extends React.Component {
         <Router>
         {this.state.isLogin === true
                 ?(
-                  <NavBar isLogin={this.state.isLogin} username={this.state.userinfo.username} handleLogout={this.handleLogout.bind(this) getUserinfo={this.getUserinfo}}></NavBar>
+                  <NavBar isLogin={this.state.isLogin} username={this.state.userinfo.username} handleLogout={this.handleLogout.bind(this)} getUserinfo={this.getUserinfo}></NavBar>
                 )
                 :(
                   <NavBar isLogin={this.state.isLogin}></NavBar>
                 )
-                }
+        }
           <Switch>
             <Route path='/user/login'>
               <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
