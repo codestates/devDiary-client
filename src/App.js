@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  withRouter
+  withRouter,
 } from "react-router-dom";
 import axios from "axios";
 import Login from "./component/Login"
@@ -23,19 +23,6 @@ class App extends React.Component {
       email: null,
       username: null,
     },
-    userContents: {
-      diary: null,
-      question: null,
-    },
-    singleContent: {
-      title: null,
-      content: null,
-      likes: null,
-      comments: null,
-      createdAt: null,
-      writer: null,
-      hadLiked: null,
-    },
   };
   handleResponseSuccess(param) { //로그인 성공 시 실행
     this.setState({
@@ -46,28 +33,24 @@ class App extends React.Component {
       }
     });
   }
-  handlePost(board, id, update) {
-    let url = update ? `${board}/${update}/${id}` : `${board}/${id}`;
-    axios.get(`http://localhost:4000/${url}`)
-      .then(param => {
-        this.setState({ singleContent: param.data });
-        this.props.history.push(`/${board}/${id}`);
-      })
-  }
-  handleLogout(){//로그아웃버튼 누르면실행
-    this.setState({isLogin:false})
-    window.sessionStorage.clear();
-  }
-  getUserinfo() {
-    axios.get("http://localhost:4000/user/userinfo")
-      .then(param => {
-        this.setState({
-          userContents: {
-            diary: param.data.diarys,
-            question: param.data.questions
-          }
-        });
-      })
+  
+  handleLogout(){
+    axios.post("http://localhost:4000/user/logout",null,{withCredentials:true})
+    .then(()=>{
+      window.sessionStorage.clear()
+    })
+    .then(()=>{
+      this.props.history.push("/")
+    })
+    .then(()=>{
+      this.setState(
+        {isLogin:false,
+        userinfo:{
+          email:null,
+          username:null
+        }}
+        )
+    })
   }
   updateUsername(newName){//유저네임 변경 시 실행
     this.setState({
@@ -80,10 +63,10 @@ class App extends React.Component {
   componentDidMount(){
     if(window.sessionStorage.isLogin){
       this.setState({
-        isLogin:true,
-        userinfo:{
-          email:window.sessionStorage.email,
-          username:window.sessionStorage.username,
+        isLogin: true,
+        userinfo: {
+          email: window.sessionStorage.email,
+          username: window.sessionStorage.username,
         }
       })
     }
@@ -93,14 +76,18 @@ class App extends React.Component {
       <>
         <h1>hi every one</h1>
         <Router>
-        {this.state.isLogin === true
-                ?(
-                  <NavBar isLogin={this.state.isLogin} username={this.state.userinfo.username} handleLogout={this.handleLogout.bind(this)} getUserinfo={this.getUserinfo.bind(this)}></NavBar>
-                )
-                :(
-                  <NavBar isLogin={this.state.isLogin}></NavBar>
-                )
-        }
+          {this.state.isLogin === true
+            ? (
+              <NavBar
+                isLogin={this.state.isLogin}
+                username={this.state.userinfo.username}
+                handleLogout={this.handleLogout.bind(this)}
+              ></NavBar>
+            )
+            : (
+              <NavBar isLogin={this.state.isLogin}></NavBar>
+            )
+          }
           <Switch>
             <Route path='/user/login'>
               <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
@@ -114,46 +101,40 @@ class App extends React.Component {
             <Route exact path="/user/userinfo">
               <Userinfo
                 userinfo={this.state.userinfo}
-                userContents={this.state.userContents}
-                handlePost={this.handlePost.bind(this)}
               />
             </Route>
-            <Route path='/user/updateUserinfo/:id'>
+            <Route path='/user/updateUserinfo'>
               <UpdateUserInfo userinfo={this.state.userinfo} updateUsername={this.updateUsername.bind(this)} />
             </Route>
-            <Route path='/diary'>
-              <BoardList link='diary' isLogin={this.state.isLogin} />
-            </Route>
-            <Route path='/question'>
-              <BoardList link='question' isLogin={this.state.isLogin} />
-            </Route>
             <Route path="/diary/newPost">
-              <WritingContent singleContent={this.state.singleContent} />
+              <WritingContent />
             </Route>
             <Route path="/question/newPost">
-              <WritingContent singleContent={this.state.singleContent} />
+              <WritingContent />
             </Route>
             <Route path="/diary/updatePost/:id">
-              <WritingContent singleContent={this.state.singleContent} />
+              <WritingContent />
             </Route>
             <Route path="/question/updatePost/:id">
-              <WritingContent singleContent={this.state.singleContent} />
+              <WritingContent />
             </Route>
             <Route path="/diary/:id">
               <Content
                 isLogin={this.state.isLogin}
                 username={this.state.userinfo.username}
-                singleContent={this.state.singleContent}
-                handlePost={this.handlePost.bind(this)}
               />
             </Route>
             <Route path="/question/:id">
               <Content
                 isLogin={this.state.isLogin}
                 username={this.state.userinfo.username}
-                singleContent={this.state.singleContent}
-                handlePost={this.handlePost.bind(this)}
               />
+            </Route>
+            <Route path='/diary'>
+              <BoardList isLogin={this.state.isLogin} />
+            </Route>
+            <Route path='/question'>
+              <BoardList isLogin={this.state.isLogin} />
             </Route>
           </Switch>
         </Router>
