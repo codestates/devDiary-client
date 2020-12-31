@@ -1,51 +1,56 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Search from "./Search"
 
 axios.defaults.withCredentials = true;
 
-const Content = function ({ isLogin, username, singleContent, handlePost }) {
+const Content = function ({ isLogin, username }) {
   const history = useHistory();
   const id = window.location.href.split("/")[4];
   const board = window.location.href.split("/")[3];
-  const { title, content, likes, comments, createdAt, writer, hadLiked } = singleContent;
   let values = {
     keyword: "",
     newComment: "",
   };
+  const [ singleContent, setSingleContent ] = useState({});
+  const [ hadLiked, setHadLiked ] = useState("");
+  useEffect(() => {
+    axios.get(`http://localhost:4000/${board}/${id}`)
+    .then((param) => {
+      setSingleContent(param.data.data);
+      setHadLiked(param.data.hadLiked);
+    })
+  },[])
+  const { title, content, likes, comments, createdAt, writer } = singleContent;
 
+  console.log(singleContent);
   const handleInputValue = (key) => (e) => {
     values[key] = e.target.value;
   }
 
-  const search = function () {
-    //TODO 검색기능 -> 컴포넌트 분리 예정
-    console.log(values.keyword);
-    console.log("searching!!!!!!!!!!!!!!!");
-  }
   const handleUpdate = function () {
-    const update = "updatePost";
-    handlePost(board, id, update)
+    // const update = "updatePost";
+    // handlePost(board, id, update);
     history.push(`/${board}/updatePost/${id}`);
   }
-  const handleDelete = function () { //TODO 모달창 필요할듯
+  const handleDelete = function () {
     axios.post(`http://localhost:4000/${board}/deletePost/${id}`)
       .then(() => {
         history.push(`/${board}`);
       })
   }
   const handleLikes = function () {
-    useEffect(() => {
+    // useEffect(() => { //TODO 렌더 다시 되니..?
       axios.post(`http://localhost:4000/${board}/${id}/like/`)
         .then(() => {
-          history.replace(`/${board}/${id}`); //TODO 렌더 다시 되니..?
+          history.replace(`/${board}/${id}`);
         })
         .catch((err) => console.log(err))
-    },[])
+    // },[])
   }
   const handleNewComment = function () {
-    useEffect(() => {
+    // useEffect(() => {
       axios.post(`http://localhost:4000/${board}/${id}/newComment`, {
         content: values.newComment,
         id: id,
@@ -53,7 +58,7 @@ const Content = function ({ isLogin, username, singleContent, handlePost }) {
         .then(() => {
           history.replace(`/${board}/${id}`);
         })
-    })
+    // })
   }
   return (<>
     <Search></Search>
@@ -73,7 +78,7 @@ const Content = function ({ isLogin, username, singleContent, handlePost }) {
       {isLogin
         ? <button onClick={handleLikes}>따봉 {likes}</button>
         : <span>따봉 {likes}</span>
-      }{isLogin && hadLiked
+      }{isLogin && (hadLiked === "true")
         ? <span>한 번 더 좋아요를 누르면 좋아요를 취소 할 수 있습니다</span>
         : <span />
       }
