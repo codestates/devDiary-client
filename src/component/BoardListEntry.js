@@ -1,8 +1,11 @@
 import React from 'react';
-function BoardListEntry({content}) {
+import {
+  Link,
+} from "react-router-dom";
+function BoardListEntry({content,link}) {
   return (
     <li>
-      <p>{content.title}</p>
+      <p><Link to={`/${link}/${content.id}`}>{content.title}</Link></p>
       <p>{content.writer}</p>
       <p>{content.created_at}</p>
       <p>{content.comments.length}</p>

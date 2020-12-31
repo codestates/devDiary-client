@@ -3,9 +3,9 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  withRouter
+  withRouter,
 } from "react-router-dom";
-
+import axios from "axios";
 import Login from "./component/Login"
 import NavBar from "./component/NavBar"
 import Userinfo from "./component/Userinfo";
@@ -35,12 +35,24 @@ class App extends React.Component {
       }
     });
   }
-  handleLogout() {
-    this.setState({ isLogin: false })
-    window.sessionStorage.clear();
+  
+  handleLogout(){
+    axios.get("http://localhost:4000/user/logout")
+    .then(()=>{
+      window.sessionStorage.clear()
+    })
+    .then(()=>{
+      this.props.history.push("/")
+    })
+    .then(()=>{
+      this.setState(
+        {isLogin:false,
+        userinfo:null}
+        )
+    })
   }
-  componentDidMount() {
-    if (window.sessionStorage.isLogin) {
+  componentDidMount(){
+    if(window.sessionStorage.isLogin){
       this.setState({
         isLogin: true,
         userinfo: {
@@ -82,9 +94,6 @@ class App extends React.Component {
               <Userinfo
                 userinfo={this.state.userinfo}
               />
-            </Route>
-            <Route path='/user/updateUserinfo/:id'>
-              <UpdateUserInfo userinfo={this.state.userinfo} />
             </Route>
             <Route path='/user/updateUserinfo/:id'>
               <UpdateUserInfo userinfo={this.state.userinfo} />
