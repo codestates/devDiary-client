@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Search from "./Search"
 
 axios.defaults.withCredentials = true;
 
@@ -55,10 +56,7 @@ const Content = function ({ isLogin, username, singleContent, handlePost }) {
     })
   }
   return (<>
-    <div>검색:
-        <input type="text" className="keyword" onChange={handleInputValue("keyword")} />
-      <button onClick={search}>검색</button>
-    </div>
+    <Search></Search>
     <div>제목: {title}</div>
     <div>
       <span>{writer}</span>

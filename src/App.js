@@ -121,10 +121,10 @@ class App extends React.Component {
               <UpdateUserInfo userinfo={this.state.userinfo} />
             </Route>
             <Route path='/diary'>
-              <BoardList link='diary' isLogin={this.state.isLogin} />
+              <BoardList isLogin={this.state.isLogin} />
             </Route>
             <Route path='/question'>
-              <BoardList link='question' isLogin={this.state.isLogin} />
+              <BoardList isLogin={this.state.isLogin} />
             </Route>
             <Route path="/diary/newPost">
               <WritingContent singleContent={this.state.singleContent} />
