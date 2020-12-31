@@ -6,7 +6,6 @@ import {
   withRouter
 } from "react-router-dom";
 import axios from "axios";
-
 import Login from "./component/Login"
 import NavBar from "./component/NavBar"
 import Userinfo from "./component/Userinfo";
@@ -16,9 +15,7 @@ import SignUp from "./component/SignUp";
 import WritingContent from "./component/WritingContent";
 import UpdateUserInfo from "./component/UpdateUserInfo";
 import Content from "./component/Content";
-
 import "./App.css";
-
 class App extends React.Component {
   state = {
     isLogin: false,
@@ -40,7 +37,7 @@ class App extends React.Component {
       hadLiked: null,
     },
   };
-  handleResponseSuccess(param) {
+  handleResponseSuccess(param) { //로그인 성공 시 실행
     this.setState({
       isLogin: true,
       userinfo: {
@@ -57,7 +54,7 @@ class App extends React.Component {
         this.props.history.push(`/${board}/${id}`);
       })
   }
-  handleLogout(){
+  handleLogout(){//로그아웃버튼 누르면실행
     this.setState({isLogin:false})
     window.sessionStorage.clear();
   }
@@ -72,6 +69,14 @@ class App extends React.Component {
         });
       })
   }
+  updateUsername(newName){//유저네임 변경 시 실행
+    this.setState({
+      userinfo:{
+        username:newName
+      }
+    })
+  }
+  //윈도우 세션확인하고 있으면 유지
   componentDidMount(){
     if(window.sessionStorage.isLogin){
       this.setState({
@@ -83,7 +88,6 @@ class App extends React.Component {
       })
     }
   }
-  
   render() {
     return (
       <>
@@ -115,10 +119,7 @@ class App extends React.Component {
               />
             </Route>
             <Route path='/user/updateUserinfo/:id'>
-              <UpdateUserInfo userinfo={this.state.userinfo} />
-            </Route>
-            <Route path='/user/updateUserinfo/:id'>
-              <UpdateUserInfo userinfo={this.state.userinfo} />
+              <UpdateUserInfo userinfo={this.state.userinfo} updateUsername={this.updateUsername.bind(this)} />
             </Route>
             <Route path='/diary'>
               <BoardList link='diary' isLogin={this.state.isLogin} />
@@ -138,7 +139,6 @@ class App extends React.Component {
             <Route path="/question/updatePost/:id">
               <WritingContent singleContent={this.state.singleContent} />
             </Route>
-
             <Route path="/diary/:id">
               <Content
                 isLogin={this.state.isLogin}
@@ -155,7 +155,6 @@ class App extends React.Component {
                 handlePost={this.handlePost.bind(this)}
               />
             </Route>
-
           </Switch>
         </Router>
       </>
