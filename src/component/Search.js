@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-​
 function Search() {
   const board = window.location.href.split("/")[3];
   const [ keyword, setKeyword ] = useState("");
-​
   const getKeyword = (e) => {
     setKeyword(e.target.value);
     console.log(keyword);
   }
-​
   return (
     <div>
       <input type="text" onChange={getKeyword} />
@@ -17,5 +14,5 @@ function Search() {
     </div>
   )
 }
-​
+
 export default Search;

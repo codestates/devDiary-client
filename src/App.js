@@ -101,12 +101,6 @@ class App extends React.Component {
             <Route path='/user/updateUserinfo/:id'>
               <UpdateUserInfo userinfo={this.state.userinfo} />
             </Route>
-            <Route path='/diary'>
-              <BoardList isLogin={this.state.isLogin} />
-            </Route>
-            <Route path='/question'>
-              <BoardList isLogin={this.state.isLogin} />
-            </Route>
             <Route path="/diary/newPost">
               <WritingContent />
             </Route>
@@ -131,6 +125,12 @@ class App extends React.Component {
                 isLogin={this.state.isLogin}
                 username={this.state.userinfo.username}
               />
+            </Route>
+            <Route path='/diary'>
+              <BoardList isLogin={this.state.isLogin} />
+            </Route>
+            <Route path='/question'>
+              <BoardList isLogin={this.state.isLogin} />
             </Route>
 
           </Switch>
