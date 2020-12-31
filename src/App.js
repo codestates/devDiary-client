@@ -15,9 +15,7 @@ import SignUp from "./component/SignUp";
 import WritingContent from "./component/WritingContent";
 import UpdateUserInfo from "./component/UpdateUserInfo";
 import Content from "./component/Content";
-
 import "./App.css";
-
 class App extends React.Component {
   state = {
     isLogin: false,
@@ -26,7 +24,7 @@ class App extends React.Component {
       username: null,
     },
   };
-  handleResponseSuccess(param) {
+  handleResponseSuccess(param) { //로그인 성공 시 실행
     this.setState({
       isLogin: true,
       userinfo: {
@@ -54,6 +52,14 @@ class App extends React.Component {
         )
     })
   }
+  updateUsername(newName){//유저네임 변경 시 실행
+    this.setState({
+      userinfo:{
+        username:newName
+      }
+    })
+  }
+  //윈도우 세션확인하고 있으면 유지
   componentDidMount(){
     if(window.sessionStorage.isLogin){
       this.setState({
@@ -65,7 +71,6 @@ class App extends React.Component {
       })
     }
   }
-
   render() {
     return (
       <>
@@ -98,8 +103,8 @@ class App extends React.Component {
                 userinfo={this.state.userinfo}
               />
             </Route>
-            <Route path='/user/updateUserinfo/:id'>
-              <UpdateUserInfo userinfo={this.state.userinfo} />
+            <Route path='/user/updateUserinfo'>
+              <UpdateUserInfo userinfo={this.state.userinfo} updateUsername={this.updateUsername.bind(this)} />
             </Route>
             <Route path="/diary/newPost">
               <WritingContent />
@@ -113,7 +118,6 @@ class App extends React.Component {
             <Route path="/question/updatePost/:id">
               <WritingContent />
             </Route>
-
             <Route path="/diary/:id">
               <Content
                 isLogin={this.state.isLogin}
@@ -132,7 +136,6 @@ class App extends React.Component {
             <Route path='/question'>
               <BoardList isLogin={this.state.isLogin} />
             </Route>
-
           </Switch>
         </Router>
       </>
