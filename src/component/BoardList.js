@@ -11,9 +11,12 @@ function BoardList({ link,isLogin }) {
     .then(param=>{
       setContents(param.data.list)
     })
+    .catch(()=>{
+      console.log('오류오류')
+    })
   },[]);
   const contentsList = contents.map((ele)=>{
-    return <BoardListEntry key={ele.id} content={ele} />
+    return <BoardListEntry key={ele.id} content={ele} link={link} />
   })
   return (
     <div>

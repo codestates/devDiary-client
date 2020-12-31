@@ -8,9 +8,7 @@ function NavBar({isLogin, username, getUserinfo, handleLogout}){
   const history = useHistory();
   const handleClick = () => {
     getUserinfo()
-      // .then(() => {
-        history.push("/user/userinfo");
-      // })
+    history.push("/user/userinfo");
     }
     return(
       <>
