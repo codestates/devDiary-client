@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Search from "./Search"
 
 axios.defaults.withCredentials = true;
 
@@ -28,11 +29,6 @@ const Content = function ({ isLogin, username }) {
     values[key] = e.target.value;
   }
 
-  const search = function () {
-    //TODO 검색기능 -> 컴포넌트 분리 예정
-    console.log(values.keyword);
-    console.log("searching!!!!!!!!!!!!!!!");
-  }
   const handleUpdate = function () {
     // const update = "updatePost";
     // handlePost(board, id, update);
@@ -65,11 +61,7 @@ const Content = function ({ isLogin, username }) {
     // })
   }
   return (<>
-  {console.log("??????")}
-    <div>검색:
-        <input type="text" className="keyword" onChange={handleInputValue("keyword")} />
-      <button onClick={search}>검색</button>
-    </div>
+    <Search></Search>
     <div>제목: {title}</div>
     <div>
       <span>{writer}</span>
