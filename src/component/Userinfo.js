@@ -6,12 +6,6 @@ function Userinfo({ userinfo, userContents, handlePost }) {
   function updateUserinfo() {
     history.push("/user/updateUserinfo");
   }
-  function getContent(board, id) {
-    handlePost(board, id);
-      // .then(() => {
-        history.push(`/${board}/${id}`);
-      // })
-  }
   //* 서버 응답 형태에 따라 바뀔 수 있음 ↓
   const diary = userContents.diary;
   const quest = userContents.question;
@@ -29,7 +23,7 @@ function Userinfo({ userinfo, userContents, handlePost }) {
         <div className="diary">
           {diary ? (
             diary.map((item, idx) => (<div key={idx}>
-              <Link onClick={getContent("diary", item.id)}>{item.title}</Link>
+              <Link onClick={() => (handlePost("diary", item.id))}>{item.title}</Link>
               <span className="created_at">{item.created_at}</span>
               <span>댓글:({item.comments})</span>
               <span>공감:({item.likes})</span>
@@ -42,7 +36,7 @@ function Userinfo({ userinfo, userContents, handlePost }) {
         <div className="question">
           {quest ? (
             quest.map((item, idx) => (<div key={idx}>
-              <Link onClick={getContent("question", item.id)}>{item.title}</Link>
+              <Link onClick={() => (handlePost("question", item.id))}>{item.title}</Link>
               <span className="created_at">{item.created_at}</span>
               <span>댓글:({item.comments})</span>
               <span>공감:({item.likes})</span>

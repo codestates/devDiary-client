@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -24,10 +24,9 @@ const Content = function ({ isLogin, username, singleContent, handlePost }) {
     console.log("searching!!!!!!!!!!!!!!!");
   }
   const handleUpdate = function () {
-    handlePost(board, id)
-      .then(() => {
-        history.push(`/${board}/updatePost/${id}`);
-      })
+    const update = "updatePost";
+    handlePost(board, id, update)
+    history.push(`/${board}/updatePost/${id}`);
   }
   const handleDelete = function () { //TODO 모달창 필요할듯
     axios.post(`http://localhost:4000/${board}/deletePost/${id}`)
@@ -36,24 +35,24 @@ const Content = function ({ isLogin, username, singleContent, handlePost }) {
       })
   }
   const handleLikes = function () {
-    axios.post(`http://localhost:4000/${board}/${id}/like/`)
-      .then(() => {
-        handlePost(board, id)
-      })
-      .then(() => {
-        history.replace(`/${board}/${id}`);
-      })
-      .catch((err) => console.log(err))
+    useEffect(() => {
+      axios.post(`http://localhost:4000/${board}/${id}/like/`)
+        .then(() => {
+          history.replace(`/${board}/${id}`); //TODO 렌더 다시 되니..?
+        })
+        .catch((err) => console.log(err))
+    },[])
   }
   const handleNewComment = function () {
-    axios.post(`http://localhost:4000/${board}/${id}/newComment`, {
-      writer: username,
-      content: values.newComment,
-      id: id,
-    })
-      .then(() => {
-        history.replace(`/${board}/${id}`);
+    useEffect(() => {
+      axios.post(`http://localhost:4000/${board}/${id}/newComment`, {
+        content: values.newComment,
+        id: id,
       })
+        .then(() => {
+          history.replace(`/${board}/${id}`);
+        })
+    })
   }
   return (<>
     <div>검색:

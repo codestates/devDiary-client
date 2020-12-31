@@ -48,22 +48,17 @@ class App extends React.Component {
       }
     });
   }
-  handlePost(board, id) {
-    axios.get(`http://localhost:4000/${board}/${id}`)
+  handlePost(board, id, update) {
+    let url = update ? `${board}/${update}/${id}` : `${board}/${id}`;
+    axios.get(`http://localhost:4000/${url}`)
       .then(param => {
         this.setState({ singleContent: param.data });
+        this.props.history.push(`/${board}/${id}`);
       })
   }
   handleLogout(){
     this.setState({isLogin:false})
     window.sessionStorage.clear();
-  }
-  handleDiaryPost(id) {
-    axios.get(`http://localhost:4000/diary/updatePost/${id}`)
-    .then(param => {
-      this.setState({ preData: param.data });
-      this.props.history.push(`/diary/updatePost/${id}`);
-    })
   }
   getUserinfo() {
     axios.get("http://localhost:4000/user/userinfo")
