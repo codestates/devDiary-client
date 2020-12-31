@@ -9,13 +9,29 @@ class WritingContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.singleContent ? this.props.singleContent.id : "",
-      title: this.props.singleContent ? this.props.singleContent.title : "",
-      content: this.props.singleContent ? this.props.singleContent.content : "",
-      tags: this.props.singleContent ? this.props.singleContent.tags : "",
+      board: window.location.href.split("/")[3],
+      id: (window.location.href.split("/")[5] > -1) ? window.location.href.split("/")[5] : "",
+      title: "",
+      content: "",
+      tags: "",
       errorMessage: "",
     }
     this.handleInputValue = this.handleInputValue.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const { board, id } = this.state;
+    if (id) {
+      axios.get(`http://localhost:4000/${board}/${id}`)
+        .then((param) => {
+          this.setState({
+            title: param.data.data ? param.data.data.title : "",
+            content: param.data.data ? param.data.data.content : "",
+            tags: param.data.data ? param.data.data.tags : "",
+          })
+        })
+    }
   }
 
   handleInputValue = (key) => (e) => {
@@ -26,15 +42,14 @@ class WritingContent extends React.Component {
   };
 
   handleSubmit = () => {
-    const { id, title, content, tags } = this.state;
-    const board = window.location.href.split("/")[3]; // 게시판 이름
-    const todo = this.props.singleContent ? `updatePost/${id}` : "newPost"; // 수정/id or 작성
-    console.log(`board: ${board}, todo: ${todo}`);
+    const { board, id, title, content, tags } = this.state;
+    const todo = id ? "updatePost" : "newPost"; // 수정/id or 작성
     if (!title || !content) {
       this.setState({ errorMessage: "제목과 내용은 필수입니다" });
     } else {
       this.setState({ errorMessage: "" });
       axios.post(`http://localhost:4000/${board}/${todo}`, {
+        id: id,
         title: title,
         content: content,
         tags: tags,
@@ -63,12 +78,12 @@ class WritingContent extends React.Component {
           config={{
             toolbar: {
               items: [
-                  'heading', '|',
-                  'bold', 'italic', 'link', '|',
-                  'bulletedList', 'numberedList',/* 'todoList', '|',
+                'heading', '|',
+                'bold', 'italic', 'link', '|',
+                'bulletedList', 'numberedList',/* 'todoList', '|',
                   'fontfamily', 'fontsize', 'fontColor', '|', //! 아직 안됨 플러그인 설치 필요한듯..
                   'code', 'codeBlock',*/ '|',
-                  'undo', 'redo'
+                'undo', 'redo'
               ],
               shouldNotGroupWhenFull: true
             }

@@ -25,19 +25,6 @@ class App extends React.Component {
       email: null,
       username: null,
     },
-    userContents: {
-      diary: null,
-      question: null,
-    },
-    singleContent: {
-      title: null,
-      content: null,
-      likes: null,
-      comments: null,
-      createdAt: null,
-      writer: null,
-      hadLiked: null,
-    },
   };
   handleResponseSuccess(param) {
     this.setState({
@@ -47,29 +34,6 @@ class App extends React.Component {
         email: param.email
       }
     });
-  }
-  handlePost(board, id, update) {
-    let url = update ? `${board}/${update}/${id}` : `${board}/${id}`;
-    axios.get(`http://localhost:4000/${url}`)
-      .then(param => {
-        this.setState({ singleContent: param.data });
-        this.props.history.push(`/${board}/${id}`);
-      })
-  }
-  handleLogout(){
-    this.setState({isLogin:false})
-    window.sessionStorage.clear();
-  }
-  getUserinfo() {
-    axios.get("http://localhost:4000/user/userinfo")
-      .then(param => {
-        this.setState({
-          userContents: {
-            diary: param.data.diarys,
-            question: param.data.questions
-          }
-        });
-      })
   }
   
   handleLogout(){
@@ -90,28 +54,32 @@ class App extends React.Component {
   componentDidMount(){
     if(window.sessionStorage.isLogin){
       this.setState({
-        isLogin:true,
-        userinfo:{
-          email:window.sessionStorage.email,
-          username:window.sessionStorage.username,
+        isLogin: true,
+        userinfo: {
+          email: window.sessionStorage.email,
+          username: window.sessionStorage.username,
         }
       })
     }
   }
-  
+
   render() {
     return (
       <>
         <h1>hi every one</h1>
         <Router>
-        {this.state.isLogin === true
-                ?(
-                  <NavBar isLogin={this.state.isLogin} username={this.state.userinfo.username} handleLogout={this.handleLogout.bind(this)} getUserinfo={this.getUserinfo.bind(this)}></NavBar>
-                )
-                :(
-                  <NavBar isLogin={this.state.isLogin}></NavBar>
-                )
-        }
+          {this.state.isLogin === true
+            ? (
+              <NavBar
+                isLogin={this.state.isLogin}
+                username={this.state.userinfo.username}
+                handleLogout={this.handleLogout.bind(this)}
+              ></NavBar>
+            )
+            : (
+              <NavBar isLogin={this.state.isLogin}></NavBar>
+            )
+          }
           <Switch>
             <Route path='/user/login'>
               <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
@@ -125,8 +93,6 @@ class App extends React.Component {
             <Route exact path="/user/userinfo">
               <Userinfo
                 userinfo={this.state.userinfo}
-                userContents={this.state.userContents}
-                handlePost={this.handlePost.bind(this)}
               />
             </Route>
             <Route path='/user/updateUserinfo/:id'>
@@ -139,32 +105,28 @@ class App extends React.Component {
               <BoardList link='question' isLogin={this.state.isLogin} />
             </Route>
             <Route path="/diary/newPost">
-              <WritingContent singleContent={this.state.singleContent} />
+              <WritingContent />
             </Route>
             <Route path="/question/newPost">
-              <WritingContent singleContent={this.state.singleContent} />
+              <WritingContent />
             </Route>
             <Route path="/diary/updatePost/:id">
-              <WritingContent singleContent={this.state.singleContent} />
+              <WritingContent />
             </Route>
             <Route path="/question/updatePost/:id">
-              <WritingContent singleContent={this.state.singleContent} />
+              <WritingContent />
             </Route>
 
             <Route path="/diary/:id">
               <Content
                 isLogin={this.state.isLogin}
                 username={this.state.userinfo.username}
-                singleContent={this.state.singleContent}
-                handlePost={this.handlePost.bind(this)}
               />
             </Route>
             <Route path="/question/:id">
               <Content
                 isLogin={this.state.isLogin}
                 username={this.state.userinfo.username}
-                singleContent={this.state.singleContent}
-                handlePost={this.handlePost.bind(this)}
               />
             </Route>
 
