@@ -10,6 +10,7 @@ import axios from "axios";
 import Login from "./component/Login"
 import NavBar from "./component/NavBar"
 import Userinfo from "./component/Userinfo";
+import BoardList from "./component/BoardList";
 import Main from "./component/Main";
 import SignUp from "./component/SignUp";
 import WritingContent from "./component/WritingContent";
@@ -113,10 +114,10 @@ class App extends React.Component {
               <UpdateUserInfo userinfo={this.state.userinfo} />
             </Route>
             <Route path='/diary'>
-              <UpdateUserInfo link='diary' isLogin={this.state.isLogin} />
+              <BoardList link='diary' isLogin={this.state.isLogin} />
             </Route>
             <Route path='/question'>
-              <UpdateUserInfo link='question' isLogin={this.state.isLogin} />
+              <BoardList link='question' isLogin={this.state.isLogin} />
             </Route>
             <Route path="/diary/newPost">
               <WritingContent singleContent={this.state.singleContent} />
