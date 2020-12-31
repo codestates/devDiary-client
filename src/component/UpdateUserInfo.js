@@ -104,6 +104,9 @@ class UpdateUserInfo extends React.Component {
             this.props.updateUsername(param.username)
           }
         })
+        .then(()=>{
+          this.props.history.push('/user/userinfo');
+        })
   }
   deleteUserInfo=(e)=>{
     this.setState({
