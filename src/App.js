@@ -37,7 +37,7 @@ class App extends React.Component {
   }
   
   handleLogout(){
-    axios.get("http://localhost:4000/user/logout")
+    axios.post("http://localhost:4000/user/logout",null,{withCredentials:true})
     .then(()=>{
       window.sessionStorage.clear()
     })
@@ -47,7 +47,10 @@ class App extends React.Component {
     .then(()=>{
       this.setState(
         {isLogin:false,
-        userinfo:null}
+        userinfo:{
+          email:null,
+          username:null
+        }}
         )
     })
   }

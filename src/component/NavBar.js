@@ -15,7 +15,7 @@ function NavBar({ isLogin, username, handleLogout }) {
             ? (
               <>
                 <li><Link to="/user/userinfo">마이페이지</Link></li>
-                <li><Link to="/user/logout" onClick={handleLogout}>로그아웃</Link></li>
+                <li><Link onClick={handleLogout}>로그아웃</Link></li>
 
                 <p>{username}님</p>
               </>
