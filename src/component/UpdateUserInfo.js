@@ -2,6 +2,9 @@ import React from "react";
 import axios from "axios";
 import DeleteModal from "./DeleteModal"
 import CompleteModal from "./CompleteModal"
+import {
+  withRouter,
+} from "react-router-dom";
 class UpdateUserInfo extends React.Component {
   constructor(props) {
     super(props)
@@ -30,7 +33,7 @@ class UpdateUserInfo extends React.Component {
   //닉네임 중복확인
   checkUsername = () => {
     const username = this.state.username;
-    if (this.state.checked === null || username === this.props.userinfo.username) {
+    if (username === this.props.userinfo.username) {
       this.setState({ errorMsg: '현재 닉네임과 동일한 닉네임입니다' })
     }else{
     axios.post("http://localhost:4000/user/checkUsername", { username:username })
@@ -39,8 +42,8 @@ class UpdateUserInfo extends React.Component {
           this.setState({ checked: false })
           this.setState({ errorMsg: '사용중인 닉네임입니다' })
         } else if(param.data.message==="valid"){
-          this.setState({ checked: true })
-          this.setState({ errorMsg: '사용가능한 닉네임입니다' })
+          this.setState({ checked: true , errorMsg: '사용가능한 닉네임입니다' })
+          // this.setState({ errorMsg: '사용가능한 닉네임입니다' })
         }
       })
     }
@@ -149,4 +152,4 @@ class UpdateUserInfo extends React.Component {
     );
   }
 }
-export default UpdateUserInfo;
+export default withRouter(UpdateUserInfo);

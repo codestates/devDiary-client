@@ -24,7 +24,7 @@ function Userinfo({ userinfo }) {
       <div className="boards">
         <h3>작성하신 일기장 목록 입니다</h3>
         <div className="diary">
-          {diary ? (
+          {diary.length>0 ? (
             diary.map((item, idx) => (<div key={idx}>
               <Link to={`/diary/${item.id}`}>{item.title}</Link>
               <span className="created_at">{item.created_at}</span>
@@ -37,7 +37,7 @@ function Userinfo({ userinfo }) {
         </div>
         <h3>작성하신 질문 목록 입니다</h3>
         <div className="question">
-          {quest ? (
+          {quest.length>0 ? (
             quest.map((item, idx) => (<div key={idx}>
               <Link to={`/question/${item.id}`}>{item.title}</Link>
               <span className="created_at">{item.created_at}</span>
