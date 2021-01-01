@@ -22,11 +22,9 @@ class DeleteModal extends React.Component{
   clickDelete(){
     const {deleteText, copyText} = this.state;
     if(deleteText === copyText){
-      this.props.deleteUserInfo()
-      this.props.deleteCompleteUserInfo()
-      // axios.post("http://localhost:3000/user/deleteUser", )
-      // .then(()=>{this.props.deleteUserInfo()})
-      // .then(()=>{this.props.deleteCompleteUserInfo()})
+      axios.post("http://localhost:4000/user/deleteUser" )
+      .then(()=>{this.props.deleteUserInfo()})
+      .then(()=>{this.props.deleteCompleteUserInfo()})
     }else{
       this.setState({errMsg:"문구가 일치하지 않습니다"})
     }

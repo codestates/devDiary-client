@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
-
 function Userinfo({ userinfo }) {
-  const [ diary, setDiary ] = useState({});
-  const [ quest, setQuestions ] = useState("");
+  const [ diary, setDiary ] = useState([]);
+  const [ quest, setQuestions ] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:4000/user/userinfo")
     .then((param) => {
-      setDiary(param.data.diarys);
-      setQuestions(param.data.questions);
+      setDiary(param.data[0].diaries);
+      setQuestions(param.data[0].questions);
     })
   },[])
-
   return (
     <>
       <div className="userinfo">
@@ -24,12 +22,12 @@ function Userinfo({ userinfo }) {
       <div className="boards">
         <h3>작성하신 일기장 목록 입니다</h3>
         <div className="diary">
-          {diary.length>0 ? (
+          {diary ? (
             diary.map((item, idx) => (<div key={idx}>
               <Link to={`/diary/${item.id}`}>{item.title}</Link>
               <span className="created_at">{item.created_at}</span>
-              <span>댓글:({item.comments})</span>
-              <span>공감:({item.likes})</span>
+              <span>댓글:({!item.comments ? 0 : item.comments.length})</span>
+              <span>따봉:({!item.likes ? 0 : item.likes.length})</span>
             </div>))
           ) : (
               <h4>No Content</h4>
@@ -37,12 +35,12 @@ function Userinfo({ userinfo }) {
         </div>
         <h3>작성하신 질문 목록 입니다</h3>
         <div className="question">
-          {quest.length>0 ? (
+          {quest ? (
             quest.map((item, idx) => (<div key={idx}>
               <Link to={`/question/${item.id}`}>{item.title}</Link>
               <span className="created_at">{item.created_at}</span>
-              <span>댓글:({item.comments})</span>
-              <span>공감:({item.likes})</span>
+              <span>댓글:({!item.comments ? 0 : item.comments.length})</span>
+              <span>따봉:({!item.likes ? 0 : item.likes.length})</span>
             </div>))
           ) : (
               <h4>No Content</h4>
@@ -52,5 +50,4 @@ function Userinfo({ userinfo }) {
     </>
   )
 }
-
 export default Userinfo;
