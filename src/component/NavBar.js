@@ -2,34 +2,36 @@ import React from "react";
 import {
   Link,
 } from "react-router-dom";
+import "./css/NavBar.css";
 
 function NavBar({ isLogin, username, handleLogout }) {
   return (
-    <>
-      <Link id="logo" to="/">로고자리</Link>
-      <nav id="nav">
-        <ul>
-          <li><Link to="/diary">자유게시판</Link></li>
-          <li><Link to="/question">질문게시판</Link></li>
+    <nav> 
+    
+      <Link id="logo" to="/">DevDiary</Link>
+      
           {isLogin === true
             ? (
-              <>
-                <li><Link to="/user/userinfo">마이페이지</Link></li>
-                <li><Link to="" onClick={handleLogout}>로그아웃</Link></li>
-
-                <p>{username}님</p>
-              </>
+                <ul className="usertag">
+                  {/* <li className="li"></li> */}
+                  <li className="li"><Link className="listnav" to="/user/userinfo">{username}님</Link></li>
+                  <li className="li"><Link className="listnav" to="" onClick={handleLogout}>로그아웃</Link></li>
+                </ul>
             )
             : (
-              <>
-                <li><Link to="/user/signup">회원가입</Link></li>
-                <li><Link to="/user/login">로그인</Link></li>
-              </>
+              <ul className="usertag">
+                <li className="li"><Link className="listnav" to="/user/signup">회원가입</Link></li>
+                <li className="li"><Link className="listnav" to="/user/login">로그인</Link></li>
+              </ul>
             )
           }
-        </ul>
-      </nav>
-    </>
+        <ul className="divtag">
+          <li className="li"><Link className='listnav' to="/diary">자유게시판</Link></li>
+          <li className="li"><Link className="listnav" to="/question">질문게시판</Link></li>
+          </ul>
+        {/* </ul> */}
+    
+    </nav>
   )
 }
 export default NavBar;
