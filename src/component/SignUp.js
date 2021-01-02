@@ -99,7 +99,7 @@ class Signup extends React.Component {
         username: username
       })
         .then(res => {
-          if (res.data) {
+          if (res.data.message === "invalid") {
             this.setState({
               usernameMessage: "사용 중인 닉네임 입니다"
             })
