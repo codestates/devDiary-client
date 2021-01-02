@@ -74,7 +74,6 @@ class App extends React.Component {
   render() {
     return (
       <>
-        {/* <h1>hi every one</h1> */}
         <Router>
           {this.state.isLogin === true
             ? (
@@ -107,16 +106,16 @@ class App extends React.Component {
               <UpdateUserInfo userinfo={this.state.userinfo} updateUsername={this.updateUsername.bind(this)} />
             </Route>
             <Route path="/diary/newPost">
-              <WritingContent />
+              <WritingContent history={this.props.history} />
             </Route>
             <Route path="/question/newPost">
-              <WritingContent />
+              <WritingContent history={this.props.history} />
             </Route>
             <Route path="/diary/updatePost/:id">
-              <WritingContent />
+              <WritingContent history={this.props.history} />
             </Route>
             <Route path="/question/updatePost/:id">
-              <WritingContent />
+              <WritingContent history={this.props.history} />
             </Route>
             <Route path="/diary/:id">
               <Content

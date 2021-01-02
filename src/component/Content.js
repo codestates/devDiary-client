@@ -10,28 +10,28 @@ const Content = function ({ isLogin, username }) {
   const id = window.location.href.split("/")[4];
   const board = window.location.href.split("/")[3];
   let values = {
-    keyword: "",
     newComment: "",
   };
-  const [ singleContent, setSingleContent ] = useState({});
-  const [ hadLiked, setHadLiked ] = useState("");
+  let commentMessage = "";
+  const [ contentData, setContentData ] = useState({ data: {} });
   useEffect(() => {
     axios.get(`http://localhost:4000/${board}/${id}`)
     .then((param) => {
-      setSingleContent(param.data.data);
-      setHadLiked(param.data.hadLiked);
+      setContentData(param.data);
     })
   },[])
-  const { title, content, likes, comments, createdAt, writer } = singleContent;
+  const { title, content, likes, comments, createdAt, writer, tags } = contentData.data;
+  const { hadLiked } = contentData;
 
-  console.log(singleContent);
   const handleInputValue = (key) => (e) => {
     values[key] = e.target.value;
   }
 
+  const timeFormater = (time = "") => {
+    return time.replace(/-/g, ".").split("T")[0]
+  }
+
   const handleUpdate = function () {
-    // const update = "updatePost";
-    // handlePost(board, id, update);
     history.push(`/${board}/updatePost/${id}`);
   }
   const handleDelete = function () {
@@ -41,31 +41,41 @@ const Content = function ({ isLogin, username }) {
       })
   }
   const handleLikes = function () {
-    // useEffect(() => { //TODO 렌더 다시 되니..?
-      axios.post(`http://localhost:4000/${board}/${id}/like/`)
-        .then(() => {
-          history.replace(`/${board}/${id}`);
-        })
-        .catch((err) => console.log(err))
-    // },[])
+    axios.post(`http://localhost:4000/${board}/${id}/like/`)
+      .then(() => {
+        axios.get(`http://localhost:4000/${board}/${id}`)
+          .then((param) => {
+            setContentData(param.data);
+          })
+      })
+      .catch((err) => console.log(err));
   }
   const handleNewComment = function () {
-    // useEffect(() => {
+    if(values.newComment){
+      commentMessage = "";
       axios.post(`http://localhost:4000/${board}/${id}/newComment`, {
         content: values.newComment,
         id: id,
       })
         .then(() => {
-          history.replace(`/${board}/${id}`);
+          axios.get(`http://localhost:4000/${board}/${id}`)
+            .then((param) => {
+              document.getElementById("comment").value = "";
+              setContentData(param.data);
+            })
         })
-    // })
+        .catch((err) => console.log(err));
+    } else {
+      commentMessage = "내용을 입력해야 합니다";
+      console.log(commentMessage)
+    }
   }
   return (<>
     <Search></Search>
     <div>제목: {title}</div>
     <div>
       <span>{writer}</span>
-      <span>{createdAt}</span>
+      <span>{timeFormater(createdAt)}</span>
       {(username === writer)
         ? (<>
           <button onClick={handleUpdate}>수정</button>
@@ -76,18 +86,23 @@ const Content = function ({ isLogin, username }) {
     <div dangerouslySetInnerHTML={{ __html: content }} /> {/* 내용 html 적용, 추천할 만한 방식은 아닌듯 */}
     <div>
       {isLogin
-        ? <button onClick={handleLikes}>따봉 {likes}</button>
-        : <span>따봉 {likes}</span>
-      }{isLogin && (hadLiked === "true")
+        ? <button onClick={handleLikes}>따봉 {likes ? likes.length : 0}</button>
+        : <span>따봉 {likes ? likes.length : 0}</span>
+      }
+      {isLogin && hadLiked === "true"
         ? <span>한 번 더 좋아요를 누르면 좋아요를 취소 할 수 있습니다</span>
         : <span />
       }
     </div>
+    <div>
+      tags: {tags}
+    </div>
     {isLogin
       ? (
         <div>댓글작성:
-          <input type="text" className="newComment" onChange={handleInputValue("newComment")} />
+          <input type="text" id="comment" className="newComment" onChange={handleInputValue("newComment")} />
           <button onClick={handleNewComment}>등록</button>
+          <div>{commentMessage}</div>
         </div>
       ) : (
         <></>
@@ -98,7 +113,7 @@ const Content = function ({ isLogin, username }) {
         comments.map((item, idx) => (<div key={idx}>
           <span>작성자: {item.writer} </span>
           <span> 댓글: {item.content}</span>
-          <span> {item.createdAt} </span>
+          <span> {timeFormater(item.createdAt)} </span>
         </div>))
       ) : (
           <h4>No Comments</h4>
