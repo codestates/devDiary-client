@@ -41,7 +41,7 @@ const Content = function ({ isLogin, username }) {
       })
   }
   const handleLikes = function () {
-    axios.post(`http://localhost:4000/${board}/${id}/like/`)
+    axios.post(`http://localhost:4000/${board}/${id}/likePost`)
       .then(() => {
         axios.get(`http://localhost:4000/${board}/${id}`)
           .then((param) => {
