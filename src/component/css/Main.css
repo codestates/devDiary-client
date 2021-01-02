@@ -1,0 +1,18 @@
+.main {
+  border: 2px solid green; /*!삭제예정*/
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.butn {
+  font-size: 20px;
+  height: 120px;
+  width: 120px;
+}
+.link {
+  text-decoration: none;
+  border: 2px solid red; /*!삭제예정*/
+  display: block;
+  margin: 50px;
+  float: left;
+}
