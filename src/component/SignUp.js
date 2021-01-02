@@ -63,7 +63,8 @@ class Signup extends React.Component {
     const { email } = this.state;
     if (!email) {
       this.setState({
-        emailMessage: "이메일을 입력 해 주세요"
+        emailMessage: "이메일을 입력 해 주세요",
+        emailChecked: false
       })
     } else if (!isEmail(email)) {
       this.setState({
@@ -76,7 +77,8 @@ class Signup extends React.Component {
         .then(res => {
           if (res.data) {
             this.setState({
-              emailMessage: "이미 가입된 이메일 입니다"
+              emailMessage: "이미 가입된 이메일 입니다",
+              emailChecked: false
             })
           } else {
             this.setState({
@@ -92,7 +94,8 @@ class Signup extends React.Component {
     const { username } = this.state;
     if (username === "") {
       this.setState({
-        usernameMessage: "닉네임을 입력 해 주세요"
+        usernameMessage: "닉네임을 입력 해 주세요",
+        usernameChecked: false
       })
     } else {
       axios.post("http://localhost:4000/user/checkUsername", {
@@ -101,7 +104,8 @@ class Signup extends React.Component {
         .then(res => {
           if (res.data.message === "invalid") {
             this.setState({
-              usernameMessage: "사용 중인 닉네임 입니다"
+              usernameMessage: "사용 중인 닉네임 입니다",
+              usernameChecked: false
             })
           } else {
             this.setState({
