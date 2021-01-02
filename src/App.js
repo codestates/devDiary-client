@@ -75,6 +75,7 @@ class App extends React.Component {
     return (
       <>
         <Router>
+
           {this.state.isLogin === true
             ? (
               <NavBar
@@ -88,11 +89,11 @@ class App extends React.Component {
             )
           }
           <Switch>
-            <Route path='/user/login'>
-              <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
-            </Route>
             <Route exact path="/">
               <Main />
+            </Route>
+            <Route path='/user/login'>
+              <Login handleResponseSuccess={this.handleResponseSuccess.bind(this)} />
             </Route>
             <Route exact path="/user/signUp">
               <SignUp />

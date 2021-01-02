@@ -55,7 +55,7 @@ class WritingContent extends React.Component {
         tags: tags,
       })
         .then(() => {
-          this.props.history.push(`/${board}`);
+          window.location.replace(`/${board}`);
         })
         .catch((err) => {
           console.log(err);

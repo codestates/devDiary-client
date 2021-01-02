@@ -7,6 +7,7 @@ import Search from "./Search"
 
 function BoardList({ isLogin }) {
   const board = window.location.href.split("/")[3];
+  const boa = window.location.href
   const link = board.split("?")[0]
   const [contents, setContents] = useState([]);
   useEffect(() => {
@@ -14,22 +15,26 @@ function BoardList({ isLogin }) {
     .then(param=>{
       setContents(param.data.list)
     })
+    .then(()=>{
+      console.log(boa)
+    })
     .catch(()=>{
       console.log('오류오류')
     })
-  },[]);
+  },[boa]);
   const contentsList = contents.map((ele)=>{
     return <BoardListEntry key={ele.id} content={ele} link={link} />
   })
   return (
-    <div>
+    <div id='boardlist'>
       <Search></Search>
+      {isLogin && <button className='write_button'><Link to={`/${link}/newPost`}>글쓰기</Link></button>}
       <div className='list'>
         <ul>
          {contentsList}
         </ul>
       </div>
-        {isLogin && <button><Link to={`/${link}/newPost`}>글쓰기</Link></button>}
+
     </div>
   )
 }
