@@ -1,0 +1,64 @@
+.writingInput {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+.writingContent {
+  width: 600px;
+  float: none;
+  margin: auto;
+}
+.alert {
+  padding: 20px;
+  background-color: rgb(255, 99, 71);
+  color: white;
+}
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.closebtn:hover {
+  color: black;
+}
+.alert-box {
+  border: 1px solid red;/*!삭제예정*/
+  height: 60px;
+}
+.title {
+  border: 1px solid red;/*!삭제예정*/
+  font-size: 20px;
+  margin-left: auto;
+}
+.tags {
+  border: 1px solid red;/*!삭제예정*/
+  font-size: 20px;
+}
+.hint {
+  font-size: 12px;
+  font-weight: bold;
+  color: #555;
+}
+.submit {
+  display: block;
+  float: none;
+  margin: auto;
+  width: 130px;
+  height: 60px;
+}
+
+.ck-rounded-corners .ck.ck-editor__top
+.ck-sticky-panel .ck-toolbar {
+  width: 100%;
+}/** 툴바 */
+.ck.ck-editor__main>.ck-editor__editable {
+  min-height: 400px;
+  width: 579px;
+}/** 입력창 width 21px 작게 해야 함... */
