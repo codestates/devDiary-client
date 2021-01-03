@@ -25,7 +25,6 @@ function BoardList({ isLogin }) {
   const tagList = tags && tags.map((item, idx) => {
     return <Link key={idx} className="board-tags-entry" to={`?tag=${item}`}>#{item}</Link>
   })
-  console.log(tagList);
   return (
     <div id='boardlist'>
       <Search />
