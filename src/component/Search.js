@@ -5,12 +5,13 @@ function Search() {
   const [ keyword, setKeyword ] = useState("");
   const getKeyword = (e) => {
     setKeyword(e.target.value);
-    console.log(keyword);
   }
   return (
     <div>
       <input type="text" onChange={getKeyword} />
-      <button><Link to={`/${board}?q=${keyword}`}>검색</Link></button>
+      <Link to={`/${board}?q=${keyword}`}>
+        <button>검색</button>
+      </Link>
     </div>
   )
 }

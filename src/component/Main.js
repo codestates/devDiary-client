@@ -2,10 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Main() {
-  return (<>
-    <Link to="/diary">자유게시판</Link>
-    <Link to="/question">질문게시판</Link>
-  </>)
+  return (
+    <div className="main">
+      <Link className="link" to="/diary">
+        <button className="butn">Diary</button>
+      </Link>
+      <Link className="link" to="/question">
+        <button className="butn">Question</button>
+      </Link>
+    </div>
+  )
 }
 
 export default Main;
