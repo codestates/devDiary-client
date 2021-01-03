@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-function BoardListEntry({content,link}) {
+function BoardListEntry({content,board}) {
   const timeFormater = (time = "") => {
     return time.replace(/-/g, ".").split("T")[0]
   }
   return (
     <li>
-      <p><Link to={`/${link}/${content.id}`}>{content.title}</Link></p>
+      <p><Link to={`/${board}/${content.id}`}>{content.title}</Link></p>
       <p>{content.writer}</p>
       <p>{timeFormater(content.createdAt)}</p>
       <p>{content.comments.length}</p>
