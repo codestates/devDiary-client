@@ -14,7 +14,7 @@
 
 .Login-MainTitle {
     margin-bottom: 20px;
-    position: fixed;
+    position: absolute;
 }
 
 .Login-Controll {
@@ -44,15 +44,22 @@
 
 .LoginAlert-box {
     text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
 }
 
 .Login-Signup-button {
-    width: 50%;
+    width: 100%;
     font-size: 20px;
+    border-radius: .25rem;
 }
 
 .Login-button {
-    width: 50%;
+    width: 100%;
     font-size: 20px;
+    border-radius: .25rem;
+}
 
+.Login-title {
+    font-size: 20px;
 }

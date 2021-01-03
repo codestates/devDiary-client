@@ -45,11 +45,11 @@ class Login extends React.Component {
         <h1 className="Login-MainTitle">LogIn</h1>
         <form onSubmit={(e) => e.preventDefault()}>  
           <div className="Login-interbal">
-            <span>이메일</span>
+            <span className="Login-title">이메일</span>
             <input className="Login-Controll" type='email' onChange={this.handleInputValue("email")}></input>
           </div>
           <div className="Login-interbal">
-            <span>비밀번호</span>
+            <span className="Login-title">비밀번호</span>
             <input className="Login-Controll" type='password' onChange={this.handleInputValue("password")}></input>
           </div>
           <div className="Login-bottom-interbal">
