@@ -68,7 +68,8 @@ class Signup extends React.Component {
       })
     } else if (!isEmail(email)) {
       this.setState({
-        emailMessage: "이메일 형식이 올바르지 않습니다"
+        emailMessage: "이메일 형식이 올바르지 않습니다",
+        emailChecked: false
       })
     } else {
       axios.post("http://localhost:4000/user/checkEmail", {

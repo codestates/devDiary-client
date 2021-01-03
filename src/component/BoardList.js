@@ -7,22 +7,19 @@ import Search from "./Search"
 
 function BoardList({ isLogin }) {
   const history = useHistory();
-  let board = window.location.href.split("/")[3];
-  let query = "";
+  const [board, setBoard] = useState(window.location.href.split("/")[3]);
+  const [query, setQuery] = useState("");
   const [contents, setContents] = useState([]);
   const [tags, setTags] = useState([]);
+  history.listen((location) => {
+    setQuery(location.search);
+    setBoard(location.pathname.substr(1));
+  });
   useEffect(() => {
-    history.listen((location) => {
-      query = location.search;
-      board = location.pathname.substr(1);
-      if(board === "diary" || board === "question" || query) {
-        getList();
-      }
-    });
     getList();
   }, [window.location.href]);
   const getList = () => {
-    axios.get(`http://localhost:4000/${board+query}`)
+    axios.get(`http://localhost:4000/${board + query}`)
       .then(param => {
         setContents(param.data.list.reverse());
         setTags(param.data.tagList);
