@@ -53,6 +53,7 @@ class App extends React.Component {
     })
   }
   updateUsername(newName){//유저네임 변경 시 실행
+    window.sessionStorage.username = newName;
     this.setState({
       userinfo:{
         username:newName
