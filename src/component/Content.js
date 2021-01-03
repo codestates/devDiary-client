@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Search from "./Search"
+import "./css/Content.css"
 
 axios.defaults.withCredentials = true;
 
@@ -28,7 +29,7 @@ const Content = function ({ isLogin, username }) {
   }
 
   const timeFormater = (time = "") => {
-    return time.replace(/-/g, ".").split("T")[0]
+    return time.split(".")[0].replace(/-/g, ".").replace("T", " ");
   }
 
   const handleUpdate = function () {
@@ -70,8 +71,8 @@ const Content = function ({ isLogin, username }) {
       console.log(commentMessage)
     }
   }
-  return (<>
-    <Search></Search>
+  return (<div className="content">
+    <Search />
     <div>제목: {title}</div>
     <div>
       <span>{writer}</span>
@@ -122,7 +123,7 @@ const Content = function ({ isLogin, username }) {
     <div>
       <button onClick={() => { history.push(`/${board}`) }}>{board}</button>
     </div>
-  </>)
+  </div>)
 }
 
 export default Content;

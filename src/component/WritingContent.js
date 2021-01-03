@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import "./css/WritingContent.css"
 
 axios.defaults.withCredentials = true;
 
@@ -43,7 +44,7 @@ class WritingContent extends React.Component {
 
   handleSubmit = () => {
     const { board, id, title, content, tags } = this.state;
-    const todo = id ? "updatePost" : "newPost"; // 수정/id or 작성
+    const todo = id ? `${id}/updatePost` : "newPost"; // 수정/id or 작성
     if (!title || !content) {
       this.setState({ errorMessage: "제목과 내용은 필수입니다" });
     } else {
@@ -65,9 +66,11 @@ class WritingContent extends React.Component {
 
   render() {
     return (
-      <>
-        <div>title:
+      <div className="writingContent">
+        <div className="title">Title
           <input
+            className="writingInput"
+            placeholder="title"
             type="text"
             name="title"
             onChange={this.handleInputValue("title")}
@@ -75,6 +78,7 @@ class WritingContent extends React.Component {
           />
         </div>
         <CKEditor
+          className="editor"
           config={{
             toolbar: {
               items: [
@@ -97,24 +101,34 @@ class WritingContent extends React.Component {
             })
           }}
         />
-        <div>tags:
+        <div className="tags">Tags
+          <span className="hint">
+            &nbsp;&nbsp;#으로 구분하여 여러개의 태그를 입력하실수 있습니다 #입력하지 않으셔도 됩니다
+          </span>
           <input
+            className="writingInput"
             type="text"
             name="tags"
             onChange={this.handleInputValue("tags")}
             value={this.state.tags}
           />
         </div>
-        <h6>#으로 구분하여 여러개의 태그를 입력하실수 있습니다</h6>
+        
+        <div className="alert-box">{}
+          {this.state.errorMessage ? (
+            <div class="alert">
+              {this.state.errorMessage}
+            </div>
+          ) : <></>}
+        </div>
         <button
-          className="btn btn-Submit"
+          className="submit"
           type="submit"
           onClick={this.handleSubmit}
         >
           등록
         </button>
-        <div className="alert-box">{this.state.errorMessage}</div>
-      </>
+      </div>
     )
   }
 }
