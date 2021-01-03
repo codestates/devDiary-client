@@ -22,17 +22,16 @@ function BoardList({ isLogin }) {
   const contentsList = contents.map((ele) => {
     return <BoardListEntry key={ele.id} content={ele} link={link} />
   })
-  console.log(tags)
+  const tagList = tags && tags.map((item, idx) => {
+    return <Link key={idx} className="board-tags-entry" to={`?tag=${item}`}>#{item}</Link>
+  })
+  console.log(tagList);
   return (
     <div id='boardlist'>
-      <Search></Search>
-      {
-        tags &&(
-        tags.map((item,idx)=>[
-          <Link key={idx} className="board-tags-entry" to={`?tag=${item}`}>#{item}</Link>
-        ])
-        )
-      }
+      <Search />
+      <div className="board-tags">
+        {tagList}
+      </div>
       {isLogin && <Link to={`/${link}/newPost`}><button className='write_button'>글쓰기</button></Link>}
       <div className='list'>
         <ul>
