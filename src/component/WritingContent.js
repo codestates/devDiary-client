@@ -66,10 +66,10 @@ class WritingContent extends React.Component {
 
   render() {
     return (
-      <div className="writingContent">
-        <div className="title">Title
+      <div className="writing-content">
+        <div className="writing-title">Title
           <input
-            className="writingInput"
+            className="writing-input"
             placeholder="title"
             type="text"
             name="title"
@@ -78,7 +78,6 @@ class WritingContent extends React.Component {
           />
         </div>
         <CKEditor
-          className="editor"
           config={{
             toolbar: {
               items: [
@@ -101,12 +100,12 @@ class WritingContent extends React.Component {
             })
           }}
         />
-        <div className="tags">Tags
-          <span className="hint">
+        <div className="writing-tags">Tags
+          <span className="writing-hint">
             &nbsp;&nbsp;#으로 구분하여 여러개의 태그를 입력하실수 있습니다 #입력하지 않으셔도 됩니다
           </span>
           <input
-            className="writingInput"
+            className="writing-input"
             type="text"
             name="tags"
             onChange={this.handleInputValue("tags")}
@@ -114,15 +113,15 @@ class WritingContent extends React.Component {
           />
         </div>
         
-        <div className="alert-box">{}
+        <div className="writing-alert-box">{}
           {this.state.errorMessage ? (
-            <div class="alert">
+            <div class="writing-alert">
               {this.state.errorMessage}
             </div>
           ) : <></>}
         </div>
         <button
-          className="submit"
+          className="writing-submit"
           type="submit"
           onClick={this.handleSubmit}
         >

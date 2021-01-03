@@ -1,37 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import BoardListEntry from './BoardListEntry'
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import './css/BoardList.css'
 import axios from 'axios';
 import Search from "./Search"
 
 function BoardList({ isLogin }) {
   const board = window.location.href.split("/")[3];
-  const boa = window.location.href
   const link = board.split("?")[0]
   const [contents, setContents] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:4000/${board}`)
-    .then(param=>{
-      setContents(param.data.list)
-    })
-    .then(()=>{
-      console.log(boa)
-    })
-    .catch(()=>{
-      console.log('오류오류')
-    })
-  },[boa]);
-  const contentsList = contents.map((ele)=>{
+      .then(param => {
+        setContents(param.data.list)
+      })
+      .then(() => {
+        console.log(window.location.href)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [window.location.href]);
+  const contentsList = contents.reverse().map((ele) => {
     return <BoardListEntry key={ele.id} content={ele} link={link} />
   })
   return (
     <div id='boardlist'>
       <Search></Search>
-      {isLogin && <button className='write_button'><Link to={`/${link}/newPost`}>글쓰기</Link></button>}
+      {isLogin && <Link to={`/${link}/newPost`}><button className='write_button'>글쓰기</button></Link>}
       <div className='list'>
         <ul>
-         {contentsList}
+          {contentsList}
         </ul>
       </div>
 
