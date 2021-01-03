@@ -1,3 +1,14 @@
+#boardlist{
+    width: 1000px;
+    margin: 0 auto;
+}
+
 .list li{
     border: 1px solid black;
+}
+.write_button{
+    /* position: relative;
+    right: 0; */
+    /* display: inline-block;
+    float: right; */
 }

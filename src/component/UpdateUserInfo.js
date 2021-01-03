@@ -26,8 +26,8 @@ class UpdateUserInfo extends React.Component {
   //state 변경함수
   handleInputValue = (key) => (e) => {
     this.setState({ [key]: e.target.value });
-    if (e.target.name === "oldPassword" || e.target.name === "newPassword" || e.target.name === "newPasswordCheck") {
-      this.checkPassword();
+    if (e.target.name === "newPassword" || e.target.name === "newPasswordCheck") {
+      this.setState({ [key]: e.target.value },this.checkPassword)
     }
   };
   //닉네임 중복확인
@@ -53,12 +53,15 @@ class UpdateUserInfo extends React.Component {
     const { oldPassword, newPassword, newPasswordCheck} = this.state;
     if(!oldPassword) {               
       this.setState({ errorMsg: '비밀번호를 변경하려면 기존의 비밀번호를 입력해야 합니다' })//새비번,비번확인은 있고 구비번만 없을 때
-    } else if (!newPassword || !newPasswordCheck) {     
+    } else 
+    if (!newPassword || !newPasswordCheck) {     
       this.setState({ errorMsg: '비밀번호를 변경하려면 새 비밀번호와 비밀번호확인을 입력해야 합니다' })//새비번이나 비번확인 없을 때
     } else if (newPassword!==newPasswordCheck) {              
       this.setState({ errorMsg: '새 비밀번호와 새 비밀번호 확인이 일치하지 않습니다' })//새비번 비번확인 다를 때
     } else if (newPassword===newPasswordCheck){
       this.setState({ errorMsg: '새 비밀번호와 새 비밀번호 확인이 일치합니다' })
+    }else if(!oldPassword){
+      this.setState({ errorMsg: '비밀번호를 변경하려면 기존의 비밀번호를 입력해야 합니다' })
     }
   };
    // 제출버튼 누르면 실행되는 함수
@@ -70,17 +73,6 @@ class UpdateUserInfo extends React.Component {
       this.setState({ errorMsg: '변경 할 정보가 없습니다' })      //변경사항 없을 때
     } else if (checked === false) {                       
       this.setState({ errorMsg: '닉네임 중복체크가 되지 않았습니다' })//닉넴 중복체크 안했을 때
-    }
-    else if (oldPassword) {//현재 비번이 채워져있으면 일치여부 확인
-      axios.post('http://localhost:4000/user/checkPassword', {
-        oldPassword: oldPassword
-      })
-        .then(() => {//현재비번 맞을 때
-          this.setState({oldPWcheck:true})
-        })
-        .catch(() => {              
-          this.setState({ errorMsg: '기존 비밀번호가 틀립니다' })//현재비번 틀릴 때
-        })
     }
     if (checked === true && !oldPassword && !newPassword && !newPasswordCheck) {
       body = {
@@ -111,6 +103,20 @@ class UpdateUserInfo extends React.Component {
           this.props.history.push('/user/userinfo');
         })
   }
+  checkOldPassword=()=>{
+    const {oldPassword} = this.state
+    if (oldPassword) {//현재 비번이 채워져있으면 일치여부 확인
+      axios.post('http://localhost:4000/user/checkPassword', {
+        oldPassword: oldPassword
+      })
+        .then(() => {//현재비번 맞을 때
+          this.setState({oldPWcheck:true,errorMsg:''})
+        })
+        .catch(() => {              
+          this.setState({ errorMsg: '기존 비밀번호가 틀립니다' })//현재비번 틀릴 때
+        })
+    }
+  }
   deleteUserInfo=(e)=>{
     this.setState({
       isDelete:!this.state.isDelete
@@ -131,7 +137,7 @@ class UpdateUserInfo extends React.Component {
         <br></br>
         <p>닉네임만 변경 시 비밀번호는 입력하지 않으셔도 됩니다.</p>
         <span>기존 비밀번호 : </span>
-        <input type='password' name='oldPassword' onChange={this.handleInputValue("oldPassword")}></input>
+        <input type='password' name='oldPassword' onBlur={this.checkOldPassword} onChange={this.handleInputValue("oldPassword")}></input>
         <br></br>
         <span>새 비밀번호 : </span>
         <input type='password' name='newPassword' onChange={this.handleInputValue("newPassword")}></input>
