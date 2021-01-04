@@ -3,11 +3,12 @@ import {
     Link,
   } from "react-router-dom";
 import './css/NavBar.css'
+import imgfile from './css/image/logo_transparent.png'
 function NavBar({isLogin, username, handleLogout}){
     return(
         <header>
         <nav id="nav">
-        <Link id="logo" to="/">Dev-diary</Link>
+         <Link id="logo" to="/"><img src={imgfile}></img></Link>
           <ul>
             <li><Link to="/diary">diary</Link></li>
             <li><Link to="/question">question</Link></li>

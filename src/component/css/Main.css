@@ -4,12 +4,26 @@
   height: 500px;
   margin: auto;
 }
-.main-btn {
+.main-btn-D {
   font-size: 20px;
   height: 250px;
   width: 250px;
   background-color: #fff;
-  border: 1px solid #000;
+  background-image: url("./image/diary.png");
+  background-position: center;
+  background-size: cover;
+  border: none;
+  margin-top: 50%;
+}
+.main-btn-Q {
+  font-size: 20px;
+  height: 250px;
+  width: 250px;
+  background-color: #fff;
+  background-image: url("./image/question.png");
+  background-position: center;
+  background-size: cover;
+  border: none;
   margin-top: 50%;
 }
 .main-link1 {
