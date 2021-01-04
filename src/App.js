@@ -56,7 +56,8 @@ class App extends React.Component {
     window.sessionStorage.username = newName;
     this.setState({
       userinfo:{
-        username:newName
+        username:newName,
+        email:this.state.userinfo.email
       }
     })
   }
