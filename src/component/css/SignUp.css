@@ -1,69 +1,47 @@
 .signframe {
-    /* border: 5px solid yellowgreen; */
-    padding: 5px 20px;
-    /* text-align: center; */
-    position: absolute;
-    top: 25%;
-    left: 23%;
-    width: 1000px;
-    height: 800px;
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
+  margin: 0 auto;
+  width: 528px;
 }
-
 .SignUp-MainTitle {
-    margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
-
 .signuptitle {
-    display: flex;
-    margin-right: 20px;
-    flex: 1;
+  float: left;
 }
-
 .signupalert-box {
-    /* border: 1px solid yellowgreen; */
-    height: 60px;
-    margin-top: 30px;
-    border-radius: .25rem;
+  color:rgb(238, 72, 72);
+  margin-top: 30px;
 }
-
 .SignUpCheckalert-box {
-    margin-top: 10px;
-    margin-right: 70px;
-    position: absolute;
-    left: 43%;
+  color:rgb(238, 72, 72);
+  margin-top: 10px;
+  margin-right: 70px;
+  position: absolute;
 }
-
 .SignUp-Controll {
-    display: block;
-    width: 500px;
-    /* height: calc(1.5em + .75rem + 2px); */
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    /* border: 1px solid #ced4da; */
-    border-radius: .25rem;
-    /* transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;*/
+  clear: both;
+  display: block;
+  width: 500px;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: .25rem;
 }
-
 .SignUp-interbal {
-    margin-bottom: 60px;
+  margin-bottom: 40px;
 }
-
 .SignUp-button {
-    float: left;
-    width: 15%;
-    margin-top: 10px;
+  float: right;
+  width: 15%;
+  margin-bottom: 5px;
 }
-
 .SignUp-button-result {
-    width: 300px;
-    height: 40px;
-    margin-top: 20px;
+  width: 300px;
+  height: 40px;
+  margin-top: 20px;
 }
