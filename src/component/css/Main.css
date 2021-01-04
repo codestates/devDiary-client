@@ -1,7 +1,7 @@
 .main {
-  /* border: 2px solid green; !삭제예정 */
+  border: 2px solid green;
   width: 700px;
-  height: 500px;
+  height: 100px;
   margin: auto;
 }
 .main-btn-D {
@@ -39,4 +39,15 @@
   display: block;
   float: right;
   margin: auto;
+}
+.mainBtn{
+  /* position: relative; */
+  /* line-height: 20px; */
+  /* display: inline-block; */
+  margin-top: -20px;
+  margin-left: -5px;
+  text-align: center;
+  color:rgb(238, 72, 72);
+  font-size: 36px;
+  font-weight: 600;
 }

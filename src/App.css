@@ -2,12 +2,23 @@
   margin: 0;
   padding: 0;
 }
-
 a{
   text-decoration: none;
   color: black;
 }
-
 ul, li{
   list-style-type: none;
+}
+button{
+  cursor: pointer;
+  vertical-align: middle;
+}
+button:active{
+  outline: none;
+}
+input{
+  vertical-align: middle;
+}
+input:focus{
+  outline: none;
 }

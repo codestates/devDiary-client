@@ -2,12 +2,12 @@
   width: 800px;
   margin: 0 auto;
 }
-
 /* 카테고리 */
 .board-category-wrapper {
   border-bottom: 2px solid #555;
   height: 26px;
   font-size: 14px;
+  margin-bottom: 5px;
 }
 .board-category-title {
   display: inline;
@@ -40,7 +40,6 @@
   padding-left: 10px;
   padding-right: 10px;
 }
-
 /* 엔트리 */
 .board-entry-wrapper {
   border-bottom: 1px solid #777;

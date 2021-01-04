@@ -12,7 +12,6 @@ class Login extends React.Component {
       };
       this.handleInputValue = this.handleInputValue.bind(this);
     }
-
     handleInputValue = (key) => (e) => {
       this.setState({ [key]: e.target.value });
     };
@@ -37,7 +36,6 @@ class Login extends React.Component {
         this.setState({errorMessage: '이메일과 비밀번호는 필수입니다.'})
       }
     };
-  
     //36 -> 다음페이지로 넘어가는 모션 취소 자세한건 12.23 노션참조
     render() {
       return (
@@ -52,6 +50,7 @@ class Login extends React.Component {
             <span className="Login-title">비밀번호</span>
             <input className="Login-Controll" type='password' onChange={this.handleInputValue("password")}></input>
           </div>
+          {<div className="LoginAlert-box">{this.state.errorMessage}</div>}
           <button className="Login-button" type='submit' onClick={this.handleLogin}>
             로그인
           </button>
@@ -60,7 +59,6 @@ class Login extends React.Component {
               <button className="Login-Signup-button">회원가입</button>
             </Link>
           </div>
-          {<div className="LoginAlert-box">{this.state.errorMessage}</div>}
         </form>
     </div>
       );
