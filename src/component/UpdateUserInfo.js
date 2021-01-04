@@ -95,8 +95,8 @@ class UpdateUserInfo extends React.Component {
     }
     axios.post('http://localhost:4000/user/updateUserinfo', body, {withCredentials:true})
         .then((param) => {
-          if(param.username){
-            this.props.updateUsername(param.username)
+          if(param.data.username){
+            this.props.updateUsername(param.data.username)
           }
         })
         .then(()=>{
