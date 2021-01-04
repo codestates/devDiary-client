@@ -1,6 +1,100 @@
-.content {
-  border: 1px solid red;/*!삭제예정*/
-  width: 600px;
-  float: none;
+.content-content {
+  border: 1px solid black;/*!삭제예정*/
+  width: 800px;
   margin: auto;
+}
+.content-container{
+  padding: 40px;
+  /* border: 1px solid red; */
+  /* height: 500px; */
+  /* background: #ccc; */
+}
+.content-title{
+  font-size: 28px;
+  border-bottom: 1px solid black;
+  margin-bottom: 8px;
+  padding: 0 0 10px 15px;
+}
+.content-info{
+  height: 12px;
+}
+.content-writer,.content-time{
+  padding-left: 15px;
+  font-size: 12px;
+  line-height: 12px;
+}
+.content-info p{
+  float: left;
+}
+.content-info button{
+  float: right;
+  width: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.content-text{
+  clear: both;
+  padding-left: 15px;
+  min-height: 400px;
+  /* height: 400px; */
+  /* border: 1px solid black; */
+  padding: 15px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #000;
+}
+.content-taglist{
+  height: 30px;
+  line-height: 30px;
+  float: left;
+}
+.content-like{
+  float: right;
+}
+.content-comment{
+  clear: both;
+  margin-bottom: 15px;
+}
+.content-likeBtn{
+  width: 50px;
+  height: 30px;
+  background: none;
+  border: 1px solid #000;
+}
+.content-newComment{
+  margin-top: 10px;
+  width: 670px;
+  height: 60px;
+}
+.content-commBtn{
+  margin-top: 10px;
+  height: 64px;
+  width: 45px;
+  border: 1px solid black;
+  border-left: none;
+  background: none;
+}
+input:focus{
+  outline: none;
+}
+.content-newComment,.content-commBtn{
+  vertical-align: middle;
+}
+.content-commList{
+  padding: 0 0 8px 15px;
+/* padding-left: 15px; */
+}
+.content-commList p{
+  margin-bottom: 5px;
+}
+.content-commWriter{
+  font-weight: 600;
+}
+.content-commTime{
+  font-size: 12px;
+  /* line-height: 16px; */
+}
+.content-boardBtn{
+  width: 100%;
+  height: 40px;
 }
