@@ -7,23 +7,29 @@
     font-size: 28px;
     line-height: 80px;
     padding: 0 20px;
+    width: 100px;
 }
 .boardinfo{
+    display: inline-block;
+    color: #555;
+    width: 300px;
     font-size: 14px;
 }
 
 #inp{
     width: 250px;
-    height: 50px;
+    height: 30px;
     margin-left: 50px;
-    /* flex: 5; */
+    vertical-align: middle;
+}
+#inp:focus{
+    outline: none;
 }
 #sear{
-    /* margin-left: 10px; */
+    vertical-align: middle;
     background: none  ;
     border: 1px solid black;
     border-left: none;
-    height: 54px;
+    height: 34px;
     width: 50px;
-    /* flex: 1; */
 }

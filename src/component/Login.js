@@ -52,12 +52,14 @@ class Login extends React.Component {
             <span className="Login-title">비밀번호</span>
             <input className="Login-Controll" type='password' onChange={this.handleInputValue("password")}></input>
           </div>
-          <div className="Login-bottom-interbal">
-            <Link to='/user/signUp'><button className="Login-Signup-button">회원가입</button></Link>
-          </div>
           <button className="Login-button" type='submit' onClick={this.handleLogin}>
             로그인
           </button>
+          <div className="Login-bottom-interbal">
+            <Link to='/user/signUp'>
+              <button className="Login-Signup-button">회원가입</button>
+            </Link>
+          </div>
           {<div className="LoginAlert-box">{this.state.errorMessage}</div>}
         </form>
     </div>

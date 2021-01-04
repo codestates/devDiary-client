@@ -14,7 +14,13 @@ function Search() {
   return (
     <div id='sea'>
       <p className='boardname'>{board}</p>
-      <span className='boardinfo'>diary는 하루동안 개발공부를 하며 어찌구한 {/*일을 자유롭게 어찌구 하는 게시판입니다*/}</span>
+      <span className='boardinfo'>
+        {board==="diary" 
+          ? "개발 일지를 자유롭게 올려보세요"
+          : "궁금한 점을 공유 해 보세요"
+        }
+        
+      </span>
       <input id='inp' type="text" onChange={getKeyword} />
       <Link to={
         keyword

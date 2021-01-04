@@ -1,14 +1,95 @@
-#boardlist{
-    width: 1000px;
-    margin: 0 auto;
+.boardlist{
+  width: 800px;
+  margin: 0 auto;
 }
 
-.list li{
-    border: 1px solid black;
+/* 카테고리 */
+.board-category-wrapper {
+  border-bottom: 2px solid #555;
+  height: 26px;
+  font-size: 14px;
 }
-.write_button{
-    /* position: relative;
-    right: 0; */
-    /* display: inline-block;
-    float: right; */
+.board-category-title {
+  display: inline;
+  float: left;
+  width: 50%;
+  height: 25px;
+  padding-left: 15px;
+}
+.board-category-entry-info {
+  display: inline;
+  float: right;
+  height: 25px;
+}
+.board-category-writer {
+  border-right: 1px solid #555;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.board-category-createdAt {
+  border-right: 1px solid #555;
+  padding-left: 17px;
+  padding-right: 17px;
+}
+.board-category-comments {
+  border-right: 1px solid #555;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.board-category-likes {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* 엔트리 */
+.board-entry-wrapper {
+  border-bottom: 1px solid #777;
+  margin-bottom: 5px;
+  padding: 5px;
+  height: 26px;
+}
+.board-title {
+  display: inline;
+  float: left;
+  width: 50%;
+  height: 25px;
+  padding-left: 5px;
+}
+.board-entry-info {
+  display: inline;
+  float: right;
+  height: 25px;
+}
+.board-writer {
+  font-size: 13px;
+  padding-right: 17px;
+}
+.board-createdAt {
+  font-size: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.board-comments {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.board-likes {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.board-tags {
+  margin-left: 20px;
+  height: 50px;
+  font-size: 14px;
+}
+.board-tags-entry {
+  font-size: 18px;
+}
+.write-button {
+  float: right;
+  height: 30px;
+  width: 80px;
+  background-color: #fff;
+  border: 1px #000 groove;
+  margin-right: 6px;
 }

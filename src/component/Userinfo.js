@@ -13,7 +13,6 @@ function Userinfo({ userinfo }) {
     })
   },[])
   return (
-    <>
     <div className="userinfo-wrapper">
       <div className="userEntry">
         <div className="userInfo-left">
@@ -61,7 +60,6 @@ function Userinfo({ userinfo }) {
         </div>
       </div>
     </div>
-    </>
   )
 }
 export default Userinfo;
