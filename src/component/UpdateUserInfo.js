@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import DeleteModal from "./DeleteModal"
 import CompleteModal from "./CompleteModal"
+import "./css/UpdateUserInfo.css"
 import {
   withRouter,
 } from "react-router-dom";
@@ -95,8 +96,8 @@ class UpdateUserInfo extends React.Component {
     }
     axios.post('http://localhost:4000/user/updateUserinfo', body, {withCredentials:true})
         .then((param) => {
-          if(param.username){
-            this.props.updateUsername(param.username)
+          if(param.data.username){
+            this.props.updateUsername(param.data.username)
           }
         })
         .then(()=>{
@@ -129,32 +130,47 @@ class UpdateUserInfo extends React.Component {
   }
   render() {
     return (
-      <>
-        <div>email : {this.props.userinfo.email}</div>
-        <span>nickname : </span>
-        <input type='text' placeholder={this.props.userinfo.username} onChange={this.handleInputValue("username")}></input>
-        <button onClick={this.checkUsername}>중복확인</button>
-        <br></br>
-        <p>닉네임만 변경 시 비밀번호는 입력하지 않으셔도 됩니다.</p>
-        <span>기존 비밀번호 : </span>
-        <input type='password' name='oldPassword' onBlur={this.checkOldPassword} onChange={this.handleInputValue("oldPassword")}></input>
-        <br></br>
-        <span>새 비밀번호 : </span>
-        <input type='password' name='newPassword' onChange={this.handleInputValue("newPassword")}></input>
-        <br></br>
-        <span>새 비밀번호 확인 : </span>
-        <input type='password' name='newPasswordCheck' onChange={this.handleInputValue("newPasswordCheck")}></input>
-        <br></br>
-        <div>{this.state.errorMsg}</div>
-        <button onClick={this.submitUserinfo}>변경</button>
-        <button onClick={this.deleteUserInfo}>탈퇴</button>
-        {this.state.isDelete&&(
-          <DeleteModal deleteUserInfo={this.deleteUserInfo} deleteCompleteUserInfo={this.deleteCompleteUserInfo}></DeleteModal>
-        )}
-        {this.state.isComplete&&(
-          <CompleteModal deleteUserInfo={this.deleteUserInfo} deleteCompleteUserInfo={this.deleteCompleteUserInfo}></CompleteModal>
-        )}
-      </>
+      <div className="content-wrapper">
+        <center id="center-wrapper">
+          <div className="userInfoEntry"><br/>email : {this.props.userinfo.email}</div>
+          <div className="userInfoEntry">
+            <span>Nickname <br/>
+              <input className="UserinfoInput" type='text' placeholder={this.props.userinfo.username} onChange={this.handleInputValue("username")}></input>
+              <button id="checkBtn" onClick={this.checkUsername}>중복확인</button>          
+              <br></br>
+              <p>닉네임만 변경 시 비밀번호는 입력하지 않으셔도 됩니다.</p>
+            </span>
+          </div>
+          <div className="userInfoEntry">
+            <span>기존 비밀번호 <br/>
+            <input className="UserinfoInput" type='password' name='oldPassword' onBlur={this.checkOldPassword} onChange={this.handleInputValue("oldPassword")}></input>
+            <br></br>
+            </span>
+          </div>
+          <div className="userInfoEntry">
+            <span>새 비밀번호 <br/>
+            <input className="UserinfoInput" type='password' name='newPassword' onChange={this.handleInputValue("newPassword")}></input>
+            <br></br>
+            </span>
+          </div>
+          <div className="userInfoEntry">
+            <span>새 비밀번호 확인<br/> </span>
+            <input className="UserinfoInput" type='password' name='newPasswordCheck' onChange={this.handleInputValue("newPasswordCheck")}></input>
+            <br></br>
+          </div>
+          <div>{this.state.errorMsg}</div>
+          <div className="userInfoEntry btns">
+            <button id="updateBtn" className="btns" onClick={this.submitUserinfo}>변경</button>
+            <button id="deleteBtn" className="btns" onClick={this.deleteUserInfo}>탈퇴</button>
+          </div>
+          {this.state.isDelete&&(
+            <DeleteModal deleteUserInfo={this.deleteUserInfo} deleteCompleteUserInfo={this.deleteCompleteUserInfo}></DeleteModal>
+          )}
+          {this.state.isComplete&&(
+            <CompleteModal deleteUserInfo={this.deleteUserInfo} deleteCompleteUserInfo={this.deleteCompleteUserInfo}></CompleteModal>
+          )}
+        </center>
+      </div>
     );
   }
 }

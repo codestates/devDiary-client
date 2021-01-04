@@ -14,7 +14,7 @@ function NavBar({isLogin, username, handleLogout}){
                 {isLogin === true
                 ?( 
                 <>
-                <li><Link to="user/userinfo">{username}님</Link></li>
+                <li><Link to="/user/userinfo">{username}님</Link></li>
                 <li><Link to="/user/logout" onClick={handleLogout}>로그아웃</Link></li>
               </>
             )

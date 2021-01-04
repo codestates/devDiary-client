@@ -1,0 +1,60 @@
+div .content-wrapper {
+  /* border: 1px solid red;!삭제예정 */
+  width: 600px;
+  float: none;
+  margin: auto;
+}
+
+#center-wrapper {
+  background-color: rgb(206, 206, 206);
+  border-radius: 12px;
+  margin-top: 40px;
+}
+
+.userInfoEntry {
+  height: 70px;
+  padding-top: 20px;
+  margin: 10px auto;
+  /* border: 1px solid black; */
+}
+
+.UserinfoInput {
+  width: 350px;
+  height: 20px;
+  text-align: center;
+}
+
+#checkBtn {
+  margin-left: 5px;
+  width: 50px;
+  height: 35px;
+  background-color: rgb(87, 87, 87);
+  border-radius: 12px;
+  border: none;
+  color: white
+}
+
+#updateBtn {
+  width: 60px;
+  height: 35px;
+  background-color: rgb(254, 174, 81);
+  border-radius: 12px;
+  border: none;
+  float:left;
+}
+
+#deleteBtn {
+  width: 60px;
+  height: 35px;
+  background-color: gray;
+  border-radius: 12px;
+  color: azure;
+  border: none;
+  float:right;
+}
+
+div .btns {
+  width: 400px;
+  margin: auto;
+}
+

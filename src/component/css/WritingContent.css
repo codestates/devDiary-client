@@ -1,52 +1,39 @@
-.writingInput {
+.writing-input {
   display: block;
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
 }
-.writingContent {
+.writing-content {
   width: 600px;
   float: none;
   margin: auto;
 }
-.alert {
+.writing-alert {
   padding: 20px;
   background-color: rgb(255, 99, 71);
   color: white;
 }
-.closebtn {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.closebtn:hover {
-  color: black;
-}
-.alert-box {
+.writing-alert-box {
   border: 1px solid red;/*!삭제예정*/
   height: 60px;
 }
-.title {
+.writing-title {
   border: 1px solid red;/*!삭제예정*/
   font-size: 20px;
   margin-left: auto;
 }
-.tags {
+.writing-tags {
   border: 1px solid red;/*!삭제예정*/
   font-size: 20px;
 }
-.hint {
+.writing-hint {
   font-size: 12px;
   font-weight: bold;
   color: #555;
 }
-.submit {
+.writing-submit {
   display: block;
   float: none;
   margin: auto;

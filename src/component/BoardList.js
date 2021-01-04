@@ -1,40 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import BoardListEntry from './BoardListEntry'
-import {Link} from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import './css/BoardList.css'
 import axios from 'axios';
 import Search from "./Search"
 
 function BoardList({ isLogin }) {
-  const board = window.location.href.split("/")[3];
-  const boa = window.location.href
-  const link = board.split("?")[0]
+  const history = useHistory();
+  const [board, setBoard] = useState(window.location.href.split("/")[3]);
+  const [query, setQuery] = useState("");
   const [contents, setContents] = useState([]);
+  const [tags, setTags] = useState([]);
+  history.listen((location) => {
+    setQuery(location.search);
+    setBoard(location.pathname.substr(1));
+  });
   useEffect(() => {
-    axios.get(`http://localhost:4000/${board}`)
-    .then(param=>{
-      setContents(param.data.list)
-    })
-    .then(()=>{
-      console.log(boa)
-    })
-    .catch(()=>{
-      console.log('오류오류')
-    })
-  },[boa]);
-  const contentsList = contents.map((ele)=>{
-    return <BoardListEntry key={ele.id} content={ele} link={link} />
+    getList();
+  }, [window.location.href]);
+  const getList = () => {
+    axios.get(`http://localhost:4000/${board + query}`)
+      .then(param => {
+        setContents(param.data.list.reverse());
+        setTags(param.data.tagList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  const contentsList = contents.map((ele) => {
+    return <BoardListEntry key={ele.id} content={ele} board={board} />
+  })
+  const tagList = tags && tags.map((item, idx) => {
+    return <Link key={idx} className="board-tags-entry" to={`?tag=${item}`}>#{item}</Link>
   })
   return (
     <div id='boardlist'>
-      <Search></Search>
-      {isLogin && <button className='write_button'><Link to={`/${link}/newPost`}>글쓰기</Link></button>}
+      <Search />
+      <div className="board-tags">
+        {tagList}
+      </div>
+      {isLogin && <Link to={`/${board}/newPost`}><button className='write_button'>글쓰기</button></Link>}
       <div className='list'>
         <ul>
-         {contentsList}
+          {contentsList}
         </ul>
       </div>
-
     </div>
   )
 }

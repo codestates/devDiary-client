@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import Search from "./Search"
 import "./css/Content.css"
 
@@ -23,6 +23,10 @@ const Content = function ({ isLogin, username }) {
   },[])
   const { title, content, likes, comments, createdAt, writer, tags } = contentData.data;
   const { hadLiked } = contentData;
+  
+  const tagList = tags && tags.split("#").slice(1).map((item, idx) => {
+      return <Link key={idx} className="board-tags-entry" to={`/${board}?tag=${item}`}>#{item}</Link>
+  })
 
   const handleInputValue = (key) => (e) => {
     values[key] = e.target.value;
@@ -36,7 +40,7 @@ const Content = function ({ isLogin, username }) {
     history.push(`/${board}/updatePost/${id}`);
   }
   const handleDelete = function () {
-    axios.post(`http://localhost:4000/${board}/deletePost/${id}`)
+    axios.post(`http://localhost:4000/${board}/${id}/deletePost`)
       .then(() => {
         history.push(`/${board}`);
       })
@@ -96,7 +100,7 @@ const Content = function ({ isLogin, username }) {
       }
     </div>
     <div>
-      tags: {tags}
+      tags: {tagList}
     </div>
     {isLogin
       ? (
@@ -111,7 +115,7 @@ const Content = function ({ isLogin, username }) {
     <div>
       댓글들:
         {comments ? (
-        comments.map((item, idx) => (<div key={idx}>
+        comments.reverse().map((item, idx) => (<div key={idx}>
           <span>작성자: {item.writer} </span>
           <span> 댓글: {item.content}</span>
           <span> {timeFormater(item.createdAt)} </span>
