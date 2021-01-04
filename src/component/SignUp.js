@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
+import "./css/SignUp.css"
 
 axios.defaults.withCredentials = true;
 
@@ -138,59 +139,65 @@ class Signup extends React.Component {
   render() {
     const { firstPassword, lastPassword, passwordMessage, emailMessage, usernameMessage, errorMessage } = this.state;
     return (
-      <div>
+      <div className="signframe">
         <center>
-          <h1>Sign Up</h1>
+          <h1 className="SignUp-MainTitle">Sign Up</h1>
           <form onSubmit={(e) => e.preventDefault()}>
-            <div>
-              <span>이메일</span>
+            <div className="SignUp-interbal">
+              <span className="signuptitle">이메일</span>
               <input
+                className="SignUp-Controll"
                 type="email"
                 onChange={this.handleInputValue("email")}
               />
               <button
+                className="SignUp-button"
                 type="submit"
                 onClick={this.checkEmail}
               >중복확인</button>
-              <span className="alert-box">{emailMessage}</span>
+              <div className="SignUpCheckalert-box">{emailMessage}</div>
             </div>
-            <div>
-              <span>비밀번호</span>
+            <div className="SignUp-interbal">
+              <span className="signuptitle">비밀번호</span>
               <input
+                className="SignUp-Controll"
                 name="firstPassword"
                 type="password"
                 onChange={this.handleInputValue("firstPassword")}
                 value={firstPassword}
               />
             </div>
-            <div>
-              <span>비밀번호 확인</span>
+            <div className="SignUp-interbal">
+              <span className="signuptitle">비밀번호 확인</span>
               <input
+                className="SignUp-Controll"
                 name="lastPassword"
                 type="password"
                 onChange={this.handleInputValue("lastPassword")}
                 value={lastPassword}
               />
-              <span className="alert-box">{passwordMessage}</span>
+              <div className="SignUpCheckalert-box">{passwordMessage}</div>
             </div>
-            <div>
-              <span>닉네임</span>
+            <div className="SignUp-interbal"> 
+              <span className="signuptitle">닉네임</span>
               <input
+                className="SignUp-Controll"
                 type="text"
                 onChange={this.handleInputValue("username")}
               />
               <button
+                className="SignUp-button"
                 type="submit"
                 onClick={this.checkUsername}
               >중복확인</button>
-              <span className="alert-box">{usernameMessage}</span>
+              <div className="SignUpCheckalert-box">{usernameMessage}</div>
             </div>
             <div>
               <Link to="/user/login">이미 아이디가 있으신가요?</Link>
             </div>
-            <div className="alert-box">{errorMessage}</div>
+            <div className="signupalert-box">{errorMessage}</div>
             <button
-              className="btn btn-signup"
+              className="SignUp-button-result"
               type="submit"
               onClick={this.handleSignup}
             >
