@@ -21,7 +21,7 @@ function Userinfo({ userinfo }) {
           <div className="username">NickName: {userinfo.username}</div>
         </div>
         <div className="userInfo-right">
-          <button id="updateBtn"><Link to="/user/updateUserinfo">회원정보 수정</Link></button>
+          <Link to="/user/updateUserinfo"><button id="updateBtn">회원정보 수정</button></Link>
         </div>
       </div>
       <div className="boards">
