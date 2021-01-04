@@ -5,13 +5,17 @@ function BoardListEntry({content,board}) {
     return time.replace(/-/g, ".").split("T")[0]
   }
   return (
-    <li>
-      <p><Link to={`/${board}/${content.id}`}>{content.title}</Link></p>
-      <p>{content.writer}</p>
-      <p>{timeFormater(content.createdAt)}</p>
-      <p>{content.comments.length}</p>
-      <p>{content.likes.length}</p>
-    </li>
+    <div className="board-entry-wrapper">
+      <div className="board-title">
+        <Link to={`/${board}/${content.id}`}>{content.title}</Link>
+      </div>
+      <div className="board-entry-info">
+        <span className="board-writer">{content.writer}</span>
+        <span className="board-createdAt">{timeFormater(content.createdAt)}</span>
+        <span className="board-comments">💬 {content.comments.length}</span>
+        <span className="board-likes">👍 {content.likes.length}</span>
+      </div>
+    </div>
   )
 }
-export default BoardListEntry
+export default BoardListEntry;

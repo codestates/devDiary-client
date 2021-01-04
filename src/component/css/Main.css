@@ -1,18 +1,28 @@
 .main {
-  border: 2px solid green; /*!삭제예정*/
-  width: 500px;
+  /* border: 2px solid green; !삭제예정 */
+  width: 700px;
   height: 500px;
   margin: auto;
 }
 .main-btn {
   font-size: 20px;
-  height: 120px;
-  width: 120px;
+  height: 250px;
+  width: 250px;
+  background-color: #fff;
+  border: 1px solid #000;
+  margin-top: 50%;
 }
-.main-link {
+.main-link1 {
+  margin-right: 300px;
   text-decoration: none;
-  border: 2px solid red; /*!삭제예정*/
   display: block;
-  margin: 50px;
   float: left;
+  margin: auto;
+}
+.main-link2 {
+  margin-right: 300px;
+  text-decoration: none;
+  display: block;
+  float: right;
+  margin: auto;
 }

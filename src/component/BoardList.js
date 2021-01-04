@@ -16,9 +16,6 @@ function BoardList({ isLogin }) {
     setBoard(location.pathname.substr(1));
   });
   useEffect(() => {
-    getList();
-  }, [window.location.href]);
-  const getList = () => {
     axios.get(`http://localhost:4000/${board + query}`)
       .then(param => {
         setContents(param.data.list.reverse());
@@ -27,7 +24,7 @@ function BoardList({ isLogin }) {
       .catch((err) => {
         console.log(err);
       });
-  }
+  }, [window.location.href]);
   const contentsList = contents.map((ele) => {
     return <BoardListEntry key={ele.id} content={ele} board={board} />
   })
@@ -35,18 +32,25 @@ function BoardList({ isLogin }) {
     return <Link key={idx} className="board-tags-entry" to={`?tag=${item}`}>#{item}</Link>
   })
   return (
-    <div id='boardlist'>
+    <div className='boardlist'>
       <Search />
       <div className="board-tags">
-        {tagList}
+        인기태그: {tagList}
+      {isLogin && <Link to={`/${board}/newPost`}><button className='write-button'>글쓰기</button></Link>}
       </div>
-      {isLogin && <Link to={`/${board}/newPost`}><button className='write_button'>글쓰기</button></Link>}
-      <div className='list'>
-        <ul>
-          {contentsList}
-        </ul>
+      <div className='content-list'>
+        <div className="board-category-wrapper">
+          <div className="board-category-title">제목</div>
+          <div className="board-category-entry-info">
+            <span className="board-category-writer">작성자</span>
+            <span className="board-category-createdAt">작성일</span>
+            <span className="board-category-comments">댓글</span>
+            <span className="board-category-likes">좋아요</span>
+          </div>
+        </div>
+        {contentsList}
       </div>
     </div>
   )
 }
-export default BoardList
+export default BoardList;
