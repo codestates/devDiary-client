@@ -42,7 +42,7 @@ class DeleteModal extends React.Component{
           <h2>탈퇴하지마세요..</h2>
           <input type='text' onChange={this.handleInputValue}></input>
           <div>{this.state.errMsg}</div>
-          <button onClick={this.clickDelete}>진짜 탈퇴하기</button>
+          <button className="userDeleteBtn" onClick={this.clickDelete}>진짜 탈퇴하기</button>
         </div>
       </div>
     </>
