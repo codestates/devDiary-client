@@ -10,8 +10,8 @@ function NavBar({isLogin, username, handleLogout}){
         <nav id="nav">
          <Link id="logo" to="/"><img src={imgfile}></img></Link>
           <ul>
-            <li><Link to="/diary">diary</Link></li>
-            <li><Link to="/question">question</Link></li>
+            <li><Link to="/diary">Diary</Link></li>
+            <li><Link to="/question">Question</Link></li>
                 {isLogin === true
                 ?( 
                 <>

@@ -15,18 +15,14 @@
     width: 300px;
     font-size: 14px;
 }
-
 #inp{
     width: 250px;
     height: 30px;
     margin-left: 50px;
-    vertical-align: middle;
-}
-#inp:focus{
-    outline: none;
+    /* vertical-align: middle; */
 }
 #sear{
-    vertical-align: middle;
+    /* vertical-align: middle; */
     background: none  ;
     border: 1px solid black;
     border-left: none;

@@ -85,19 +85,21 @@ const Content = function ({ isLogin, username }) {
           }
         </div>
         <div className='content-text' dangerouslySetInnerHTML={{ __html: content }} /> {/* 내용 html 적용, 추천할 만한 방식은 아닌듯 */}
+        <div className='content-tagLike'>
           <div className='content-taglist'>
             tags: {tagList}
           </div>
           <div className='content-like'>
-          {isLogin && hadLiked === "true"
+            {isLogin && hadLiked === "true"
               ? <span>한 번 더 좋아요를 누르면 좋아요를 취소 할 수 있습니다</span>
               : <span />
             }
             {isLogin
-              ? <button className='content-likeBtn' onClick={handleLikes}>따봉 {likes ? likes.length : 0}</button>
-              : <span>따봉 {likes ? likes.length : 0}</span>
+              ? <button className='content-likeBtn' onClick={handleLikes}>👍 {likes ? likes.length : 0}</button>
+              : <span className='content-likeBtn'>👍 {likes ? likes.length : 0}</span>
             }
           </div>
+        </div>
         {isLogin
           && (
             <div className='content-comment'>
@@ -105,15 +107,15 @@ const Content = function ({ isLogin, username }) {
               <button className="content-commBtn" onClick={handleNewComment}>등록</button>
               <div>{commentMessage}</div>
             </div>
-          ) }
+          )}
         <div>
-        {comments && (
+          {comments && (
             comments.map((item, idx) => (
-            <div key={idx} className='content-commList'>
-              <p className='content-commWriter'>{item.writer} </p>
-              <p className='content-commText'>{item.content}</p>
-              <p className='content-commTime'> {timeFormater(item.createdAt)} </p>
-            </div>))
+              <div key={idx} className='content-commList'>
+                <p className='content-commWriter'>{item.writer} </p>
+                <p className='content-commText'>{item.content}</p>
+                <p className='content-commTime'> {timeFormater(item.createdAt)} </p>
+              </div>))
           )}
         </div>
         <button className='content-boardBtn' onClick={() => { history.push(`/${board}`) }}>목록</button>
