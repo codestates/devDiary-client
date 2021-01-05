@@ -1,0 +1,25 @@
+.footer {
+  margin-top: 100px;
+  background-color: #aaa;
+  height: 120px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+
+}
+.footer-frame {
+  margin-top: 15px;
+  margin-right: 10px;
+  display: inline-block;
+}
+.footer-title {
+  font-size: 18px;
+  font-weight: 600;
+  display: inline-block;
+}
+.footer-members {
+  margin-right: 13px;
+  font-size: 20px;
+  font-weight: 500;
+  display: inline-block;
+}
