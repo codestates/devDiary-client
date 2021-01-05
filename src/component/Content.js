@@ -90,12 +90,8 @@ const Content = function ({ isLogin, username }) {
             tags: {tagList}
           </div>
           <div className='content-like'>
-            {isLogin && hadLiked === "true"
-              ? <span>한 번 더 좋아요를 누르면 좋아요를 취소 할 수 있습니다</span>
-              : <span />
-            }
             {isLogin
-              ? <button className='content-likeBtn' onClick={handleLikes}>👍 {likes ? likes.length : 0}</button>
+              ? <button className='content-likeBtn' onClick={handleLikes}>{hadLiked==="true"?<>👍</>:<>👍🏻</>} {likes ? likes.length : 0}</button>
               : <span className='content-likeBtn'>👍 {likes ? likes.length : 0}</span>
             }
           </div>
