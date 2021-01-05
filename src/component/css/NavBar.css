@@ -7,7 +7,7 @@ header{
 img {
     padding-left: 100px;
     width: 260px;
-    height: 90px;
+    height: 100px;
 }
 nav ul{
     float: right;
@@ -15,8 +15,8 @@ nav ul{
 }
 nav ul li{
     float: left;
-    height: 120px;
-    line-height: 90px;
+    height: 100px;
+    line-height: 100px;
     padding-right: 30px;
 }
 nav ul li a {

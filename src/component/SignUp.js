@@ -2,9 +2,7 @@ import React from "react";
 import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
 import "./css/SignUp.css"
-
 axios.defaults.withCredentials = true;
-
 class Signup extends React.Component {
   constructor(props) {
     super(props);
@@ -12,28 +10,23 @@ class Signup extends React.Component {
       email: "",
       emailChecked: false,
       emailMessage: "",
-
       firstPassword: "",
       lastPassword: "",
       passwordMessage: "",
       password: "",
-
       username: "",
       usernameChecked: false,
       usernameMessage: "",
-
       errorMessage: ""
     };
     this.handleInputValue = this.handleInputValue.bind(this);
   }
-
   handleInputValue = (key) => (e) => {
     this.setState({ [key]: e.target.value });
     if (e.target.name === "firstPassword" || e.target.name === "lastPassword") {
       setTimeout(this.checkPassword, 100);
     }
   };
-
   checkPassword = () => {
     const { firstPassword, lastPassword } = this.state;
     if (firstPassword.length < 1 || lastPassword.length < 1) {
@@ -55,7 +48,6 @@ class Signup extends React.Component {
       });
     }
   };
-
   checkEmail = () => {
     function isEmail(asValue) {
       let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -91,7 +83,6 @@ class Signup extends React.Component {
         })
     }
   }
-
   checkUsername = () => {
     const { username } = this.state;
     if (username === "") {
@@ -118,7 +109,6 @@ class Signup extends React.Component {
         })
     }
   }
-
   handleSignup = () => {
     const { username, password, email, emailChecked, usernameChecked } = this.state;
     if (!username || !password || !email) {
@@ -136,7 +126,6 @@ class Signup extends React.Component {
         });
     }
   }
-
   render() {
     const { firstPassword, lastPassword, passwordMessage, emailMessage, usernameMessage, errorMessage } = this.state;
     return (
@@ -146,16 +135,16 @@ class Signup extends React.Component {
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="SignUp-interbal">
               <span className="signuptitle">이메일</span>
-              <input
-                className="SignUp-Controll"
-                type="email"
-                onChange={this.handleInputValue("email")}
-              />
               <button
                 className="SignUp-button"
                 type="submit"
                 onClick={this.checkEmail}
               >중복확인</button>
+              <input
+                className="SignUp-Controll"
+                type="email"
+                onChange={this.handleInputValue("email")}
+              />
               <div className="SignUpCheckalert-box">{emailMessage}</div>
             </div>
             <div className="SignUp-interbal">
@@ -181,16 +170,16 @@ class Signup extends React.Component {
             </div>
             <div className="SignUp-interbal"> 
               <span className="signuptitle">닉네임</span>
-              <input
-                className="SignUp-Controll"
-                type="text"
-                onChange={this.handleInputValue("username")}
-              />
               <button
                 className="SignUp-button"
                 type="submit"
                 onClick={this.checkUsername}
               >중복확인</button>
+              <input
+                className="SignUp-Controll"
+                type="text"
+                onChange={this.handleInputValue("username")}
+              />
               <div className="SignUpCheckalert-box">{usernameMessage}</div>
             </div>
             <div>
@@ -210,5 +199,4 @@ class Signup extends React.Component {
     );
   }
 }
-
 export default withRouter(Signup);

@@ -1,22 +1,23 @@
 .Login-Frame {
-    /* border: 5px solid yellowgreen; */
-    padding: 5px 20px;
+    border: 1px solid yellowgreen;
+    /* padding: 5px 20px; */
     /* text-align: center; */
-    position: absolute;
-    top: 25%;
-    left: 23%;
-    width: 1000px;
-    height: 800px;
-    display: flex;
+    /* position: absolute; */
+    /* top: 25%; */
+    /* left: 23%; */
+    margin: 0 auto;
+    width: 800px;
+    /* height: 800px; */
+    display: flex;    
     justify-content: center;
     /* align-items: center; */
 }
-
 .Login-MainTitle {
+    /* text-align: center; */
+    margin-top: 20px;
     margin-bottom: 20px;
-    position: absolute;
+    /* position: absolute; */
 }
-
 .Login-Controll {
     display: block;
     width: 500px;
@@ -32,34 +33,25 @@
     border-radius: .25rem;
     /* transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;*/
 }
-
 .Login-interbal {
     margin-bottom: 60px;
     margin-top: 60px;
 }
-
 .Login-bottom-interbal {
     margin-bottom: 30px;
 }
-
 .LoginAlert-box {
     text-align: center;
     margin-top: 20px;
     font-size: 20px;
 }
-
 .Login-Signup-button {
     width: 100%;
     font-size: 20px;
     border-radius: .25rem;
 }
-
 .Login-button {
     width: 100%;
     font-size: 20px;
     border-radius: .25rem;
-}
-
-.Login-title {
-    font-size: 20px;
 }
