@@ -1,69 +1,47 @@
 .signframe {
-    border: 1px solid yellowgreen;
-    /* margin-top: 70px; */
-    /* padding: 5px 20px; */
-    margin: 0 auto;
-    width: 800px;
-    /* height: 800px; */
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
+  margin: 0 auto;
+  width: 528px;
 }
 .SignUp-MainTitle {
-    margin-top: 20px;
-    margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .signuptitle {
-    float: left;
-    /* display: flex; */
-    /* width: 300px; */
-    /* margin-right: 20px; */
-    /* flex: 1; */
+  float: left;
 }
 .signupalert-box {
-    /* border: 1px solid yellowgreen; */
-    /* height: 60px; */
-    color:rgb(238, 72, 72);
-    margin-top: 30px;
-    /* border-radius: .25rem; */
+  color:rgb(238, 72, 72);
+  margin-top: 30px;
 }
 .SignUpCheckalert-box {
-    color:rgb(238, 72, 72);
-    margin-top: 10px;
-    margin-right: 70px;
-    position: absolute;
-    /* left: 43%; */
+  color:rgb(238, 72, 72);
+  margin-top: 10px;
+  margin-right: 70px;
+  position: absolute;
 }
 .SignUp-Controll {
-    clear: both;
-    display: block;
-    width: 500px;
-    /* height: calc(1.5em + .75rem + 2px); */
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    /* border: 1px solid #ced4da; */
-    border-radius: .25rem;
-    /* transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;*/
+  clear: both;
+  display: block;
+  width: 500px;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: .25rem;
 }
 .SignUp-interbal {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 .SignUp-button {
-    float: right;
-    /* display: inline; */
-    width: 15%;
-    /* background: none; */
-    margin-bottom: 5px;
-    /* border-bottom: none; */
-    /* margin-top: 10px; */
+  float: right;
+  width: 15%;
+  margin-bottom: 5px;
 }
 .SignUp-button-result {
-    width: 300px;
-    height: 40px;
-    margin-top: 20px;
+  width: 300px;
+  height: 40px;
+  margin-top: 20px;
 }
