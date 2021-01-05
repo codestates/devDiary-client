@@ -15,6 +15,7 @@ import SignUp from "./component/SignUp";
 import WritingContent from "./component/WritingContent";
 import UpdateUserInfo from "./component/UpdateUserInfo";
 import Content from "./component/Content";
+import Footer from "./component/Footer";
 import "./App.css";
 class App extends React.Component {
   state = {
@@ -139,6 +140,7 @@ class App extends React.Component {
               <BoardList isLogin={this.state.isLogin} />
             </Route>
           </Switch>
+          <Footer />
         </Router>
       </>
     );
